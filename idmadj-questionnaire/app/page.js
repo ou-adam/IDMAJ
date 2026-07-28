@@ -155,7 +155,6 @@ export default function Home() {
     { key: 'employees', labelFr: "Nombre d'employés", labelAr: "عدد العمال" },
     { key: 'size', labelFr: "Taille de l'entreprise", labelAr: "حجم المؤسسة" },
     { key: 'domain', labelFr: "Domaine (producteur, sous-traitance, services)", labelAr: "المجال" },
-    { key: 'photo', labelFr: "Photo de profil du participant", labelAr: "الصورة الشخصية للمسجل" },
     { key: 'logo', labelFr: "Logo de l'entreprise", labelAr: "شعار المؤسسة" },
     { key: 'pdfProfile', labelFr: "Fichier profil PDF de l'entreprise", labelAr: "ملف تعريفي PDF للمؤسسة" }
   ];
