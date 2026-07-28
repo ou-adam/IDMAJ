@@ -1,0 +1,23 @@
+# System & OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment / Secret Files
+.env
+.env.local
+*.log
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# Node / Dependencies (if any)
+node_modules/
+vendor/
+
+# User Uploads (optional - un-comment if uploads shouldn't be tracked)
+# website/uploads/*
+# !website/uploads/.gitkeep

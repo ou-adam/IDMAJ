@@ -1,0 +1,304 @@
+
+================================================================================
+                    DEVIS DÉTAILLÉ — PLATEFORME IDMADJ.DZ
+                    Smart Accel Industrie 4.0 · Édition 2026
+================================================================================
+
+  Document confidentiel — Préparé le 08 Mai 2026 · Valable 30 jours
+  Client : Agence Algérienne de Soutien à l'Entrepreneuriat Jeunesse
+  Projet : WWW.IDMADJ.DZ · Période : 25 Juin – 24 Septembre 2026
+
+================================================================================
+  SECTION 1 — INFORMATIONS PRESTATAIRE
+================================================================================
+
+  Nom / Société          : [Votre nom ou raison sociale]
+  Adresse                : [Votre adresse complète]
+  Téléphone              : [+213 XX XX XX XX]
+  Email                  : [votre@email.com]
+  Registre de Commerce   : [RC : XX/XX-XXXXXXB XX]
+  N° Identification Fiscale (NIF) : [XXXXXXXXXXXXXXXX]
+
+================================================================================
+  SECTION 2 — INFORMATIONS CLIENT
+================================================================================
+
+  Client                 : Agence Algérienne de Soutien à l'Entrepreneuriat Jeunesse
+  Représentant           : [Nom du responsable]
+  Adresse                : [Adresse du client]
+  Téléphone              : [+213 XX XX XX XX]
+  Email                  : [email du client]
+
+================================================================================
+  SECTION 3 — RÉCAPITULATIF BUDGÉTAIRE GLOBAL
+================================================================================
+
+  ┌─────────────────────────────────────────────────────────┬──────────────────┐
+  │ POSTE                                                   │ MONTANT          │
+  ├─────────────────────────────────────────────────────────┼──────────────────┤
+  │ Phase 1 — MVP (Développement, 6 semaines)               │    180 000 DA    │
+  │ Phase 2 — Module QR Code & Présences (3-4 semaines)     │    120 000 DA    │
+  │ Douchette de scan QR USB/Bluetooth (matériel)           │     23 000 DA    │
+  │ ICOSNET VMware VPS — 6 mois (hébergement)               │     84 000 DA    │
+  │ Emails transactionnels Brevo — 6 mois                   │      8 000 DA    │
+  │ Domaine IDMADJ.DZ — Frais traitement dossier (NIC-DZ)   │      5 000 DA    │
+  ├─────────────────────────────────────────────────────────┼──────────────────┤
+  │ TOTAL PHASE 1 SEULE (MVP + Infrastructure)              │    300 000 DA    │
+  ├─────────────────────────────────────────────────────────┼──────────────────┤
+  │ *** TOTAL GÉNÉRAL (Phases 1 + 2 + Infrastructure) ***   │    420 000 DA    │
+  └─────────────────────────────────────────────────────────┴──────────────────┘
+
+  * Les prix sont exprimés en Dinars Algériens (DA), TTC.
+  * La Phase 2 est optionnelle et peut être planifiée après le lancement MVP.
+
+================================================================================
+  SECTION 4 — DÉTAIL PHASE 1 : MVP (6 SEMAINES)
+================================================================================
+
+  MONTANT PHASE 1 : 180 000 DA
+  ─────────────────────────────
+
+  SEMAINE 1 — Préparation & Architecture
+  ----------------------------------------
+  - Revue complète du cahier des charges IDMADJ
+  - Collecte des fichiers visuels (logo, charte graphique, contenus)
+  - Définition de l'identité visuelle (bleu foncé, cyan, gris, or)
+  - Configuration de l'hébergement ICOSNET (VMware VPS)
+  - Modélisation de la base de données (17 tables)
+  - Mise en place de l'environnement de développement
+
+  Livrables : Schéma BDD validé, maquette fil de fer, serveur opérationnel
+
+  SEMAINE 2 — Design & Maquettes
+  --------------------------------
+  - Design de la page d'accueil (Hero, countdown, stats, sponsors)
+  - Design de la page Inscription (formulaire adaptatif 8 types)
+  - Design de la page Programme (Timeline filtrable)
+  - Design de la page Sponsors/Partenaires
+  - Validation client (2 cycles de retours inclus)
+  - Adaptation RTL (Arabe) + LTR (Français)
+
+  Livrables : Maquettes HTML des 4 pages principales, approbation client
+
+  SEMAINES 3-4 — Développement Core
+  ------------------------------------
+  Front Office (14 pages publiques) :
+    [1]  Page Accueil — Hero + Countdown + KPIs + Sponsors Strip
+    [2]  Page À propos d'IDMAJ
+    [3]  Page Programme général — Timeline filtrable, export PDF
+    [4]  Page Sponsors — Classement Or/Argent/Bronze
+    [5]  Page Partenaires — logos + descriptions + liens
+    [6]  Page Séminaires régionaux — carte interactive (4 wilayas)
+    [7]  Page B2B & Sous-traitance — formulaire + liste d'opportunités
+    [8]  Page Hackathon Dz-Industry Hack — inscription équipes
+    [9]  Page 1-Minute Pitch Box — soumission projets
+    [10] Page Podcast IDMAJ Tech DZ 4.0 — player + archives
+    [11] Page Actualités & Centre de presse
+    [12] Page Ateliers de formation — 5 catégories
+    [13] Page Contact — formulaire 7 motifs + carte
+    [14] Pages légales (x5) — confidentialité, CGU, données
+
+  Back Office (19 modules) :
+    [1]  Tableau de bord (stats globales + graphiques)
+    [2]  Gestion des inscriptions (8 types + statuts)
+    [3]  Gestion des sponsors + logos
+    [4]  Gestion des partenaires
+    [5]  Gestion des demandes B2B
+    [6]  Gestion du Hackathon (équipes + axes)
+    [7]  Gestion Pitch Box (10 projets → 5 finalistes)
+    [8]  Gestion Podcast + Médias
+    [9]  Gestion des séminaires régionaux
+    [10] Gestion des ateliers
+    [11] Gestion des pages (CMS intégré)
+    [12] Gestion des actualités
+    [13] Gestion de la médiathèque
+    [14] Messages entrants (contact)
+    [15] Export Excel/CSV/PDF
+    [16] Statistiques avancées
+    [17] 7 rôles d'accès (Super Admin → Resp. Médias)
+    [18] Authentification sécurisée (2FA optionnel)
+    [19] Journaux d'activité (Logs) + Sauvegarde automatique
+
+  Emails automatiques (8 types) :
+    Email 1 : Confirmation d'inscription (immédiat)
+    Email 2 : Acceptation de participation
+    Email 3 : Refus / Demande d'informations complémentaires
+    Email 4 : Rappel avant l'événement (J-7, J-1)
+    Email 5 : Confirmation B2B
+    Email 6 : Instructions Hackathon
+    Email 7 : Prospection sponsors
+    Email 8 : Remerciement post-événement
+
+  Sécurité (10 mesures obligatoires) :
+    - Certificat SSL (HTTPS)
+    - Connexion admin sécurisée (hash bcrypt)
+    - Protection Brute Force (rate limiting)
+    - CAPTCHA sur les formulaires
+    - Protection SQL Injection, XSS, CSRF
+    - Contrôle des rôles et permissions
+    - Journaux d'activité complets
+    - Sauvegardes automatiques quotidiennes
+    - Mises à jour de sécurité incluses (3 mois)
+    - Validation et sanitisation des uploads
+
+  SEMAINE 5 — Tests & Corrections
+  ----------------------------------
+  - Tests fonctionnels sur tous les formulaires
+  - Tests des emails automatiques
+  - Tests responsive (mobile, tablette, desktop)
+  - Tests de performance (PageSpeed > 85)
+  - Tests sécurité (XSS, injection, brute force)
+  - Optimisation SEO de base (meta, sitemap, robots.txt)
+
+  SEMAINE 6 — Déploiement & Livraison
+  --------------------------------------
+  - Connexion du domaine IDMADJ.DZ
+  - Configuration SSL en production
+  - Migration base de données staging → production
+  - Lancement officiel de la plateforme
+  - Formation du responsable administrateur (3h)
+  - Remise des accès (hébergement, admin, BDD)
+  - Documentation technique (guide d'utilisation)
+
+  Livrables Phase 1 (14 éléments) :
+    [1]  Site en ligne sur WWW.IDMADJ.DZ
+    [2]  Back-office complet opérationnel
+    [3]  Base de données structurée (17 tables)
+    [4]  Formulaires d'inscription fonctionnels (8 types)
+    [5]  Système export Excel/CSV
+    [6]  Système emailing automatique (8 types)
+    [7]  Pages de contenu complètes
+    [8]  Design responsive (mobile-first)
+    [9]  Certificat SSL actif
+    [10] SEO de base configuré
+    [11] Guide d'utilisation pour l'équipe
+    [12] Comptes administrateurs avec rôles
+    [13] 1ère sauvegarde complète
+    [14] Fichier technique (hébergement, accès)
+
+================================================================================
+  SECTION 5 — DÉTAIL PHASE 2 : MODULE QR CODE & PRÉSENCES (OPTIONNELLE)
+================================================================================
+
+  MONTANT PHASE 2 : 120 000 DA
+  ─────────────────────────────
+  Durée estimée : 3 à 4 semaines après lancement MVP
+
+  10 fonctionnalités avancées :
+  ┌─────┬──────────────────────────────────┬────────────────────────────────────┐
+  │  #  │ Fonctionnalité                   │ Description technique              │
+  ├─────┼──────────────────────────────────┼────────────────────────────────────┤
+  │  1  │ QR Code par participant          │ QR unique par inscription          │
+  │  2  │ Système de présence (Scan QR)    │ Scan temps réel via douchette      │
+  │  3  │ Espace privé participants        │ Badge QR + statut + programme      │
+  │  4  │ Matchmaking B2B automatique      │ Algorithme de correspondance       │
+  │  5  │ PWA (Progressive Web App)        │ App installable sans App Store     │
+  │  6  │ Statistiques avancées temps réel │ Tableaux de bord + présences       │
+  │  7  │ Support trilingue AR/FR/EN       │ Interface en 3 langues             │
+  │  8  │ Archive vidéo & conférences      │ Bibliothèque vidéo indexée         │
+  │  9  │ Certificats électroniques        │ PDF signé par participant présent  │
+  │ 10  │ Système d'évaluation ateliers    │ Formulaires de notation temps réel │
+  └─────┴──────────────────────────────────┴────────────────────────────────────┘
+
+================================================================================
+  SECTION 6 — INFRASTRUCTURE & MATÉRIEL
+================================================================================
+
+  A. DOUCHETTE DE SCAN QR CODE — 20 000 DA
+  ------------------------------------------
+  Matériel : 1× Lecteur QR Code USB/Bluetooth
+    - Type       : Pistolet scanner 1D/2D (QR Code, DataMatrix, Code 128…)
+    - Connexion  : USB-HID + Bluetooth (dual mode)
+    - Distance   : 5 cm à 50 cm
+    - Compatib.  : Windows, Linux, Mac — Plug & Play, aucun driver requis
+    - Garantie   : 1 an fabricant
+
+  B. HÉBERGEMENT ICOSNET VMware VPS — 84 000 DA / 6 mois
+  ---------------------------------------------------------
+    - CPU          : 2 vCores minimum
+    - RAM          : 8 Go minimum
+    - Stockage     : 100 Go SSD
+    - Bande passante : Illimitée
+    - IP dédiée    : Oui (localisée en Algérie)
+    - OS           : Ubuntu 22.04 LTS
+    - Datacenter   : Alger, Algérie (conformité réglementaire)
+    - Uptime SLA   : 99.9%
+    - Protection DDoS incluse
+
+  Stack technique déployée :
+    Ubuntu 22.04 LTS
+    ├── Nginx (serveur web haute performance)
+    ├── PHP 8.2 + php-fpm
+    ├── MySQL 8.0 (base de données principale)
+    ├── Redis (cache + sessions temps réel pour scan QR)
+    ├── Supervisor (gestion des queues d'emails)
+    ├── Let's Encrypt (SSL automatique)
+    ├── UFW Firewall (ports 80, 443, 22 uniquement)
+    └── Cron jobs (sauvegardes quotidiennes)
+
+  C. DOMAINE IDMADJ.DZ — 5 000 DA (frais dossier NIC-DZ)
+  ---------------------------------------------------------
+    Géré via ICOSNET (Registrar agréé NIC-DZ)
+    Frais uniques de traitement du dossier
+
+  D. EMAILS TRANSACTIONNELS BREVO — 8 000 DA / 6 mois
+  ------------------------------------------------------
+    Plan Starter : 20 000 emails/mois
+    Intégration SMTP standard avec Laravel
+    Alternative gratuite : Brevo Free (300 emails/jour)
+
+================================================================================
+  SECTION 7 — CONDITIONS & MODALITÉS
+================================================================================
+
+  Validité du devis       : 30 jours à compter du 08 Mai 2026
+  Hébergement             : VPS loué au nom du client (accès complet remis)
+
+  MODALITÉS DE PAIEMENT :
+  ┌──────────────────────────────────────────────┬────────────────┬────────────┐
+  │ Étape                                        │ Pourcentage    │ Montant    │
+  ├──────────────────────────────────────────────┼────────────────┼────────────┤
+  │ 1ère tranche — Avant démarrage (acompte)    │      50%       │ 210 000 DA │
+  │ 2ème tranche — Livraison finale              │      50%       │ 210 000 DA │
+  └──────────────────────────────────────────────┴────────────────┴────────────┘
+  * Montants calculés sur le TOTAL GÉNÉRAL du projet : 420 000 DA.
+  * L'acompte de 50% est dû avant le démarrage des travaux.
+
+  REMARQUES :
+  - Les frais d'infrastructure (VPS, domaine, emails) sont payés séparément
+    et directement aux fournisseurs concernés (ICOSNET, NIC-DZ, Brevo).
+  - Toute modification majeure hors cahier des charges fera l'objet d'un avenant.
+
+================================================================================
+  SECTION 8 — BON POUR ACCORD / SIGNATURES
+================================================================================
+
+  Fait à _________________, le ___ / ___ / 2026
+
+  ┌──────────────────────────────────────┬──────────────────────────────────────┐
+  │           LE PRESTATAIRE             │              LE CLIENT               │
+  ├──────────────────────────────────────┼──────────────────────────────────────┤
+  │                                      │                                      │
+  │  Nom & Prénom : ________________     │  Nom & Prénom : ________________     │
+  │                                      │                                      │
+  │  Qualité      : ________________     │  Qualité      : ________________     │
+  │                                      │                                      │
+  │  Date         : ________________     │  Date         : ________________     │
+  │                                      │                                      │
+  │                                      │                                      │
+  │  Signature & Cachet :                │  Signature & Cachet :                │
+  │                                      │                                      │
+  │                                      │                                      │
+  │                                      │                                      │
+  │                                      │                                      │
+  │                                      │                                      │
+  │                                      │                                      │
+  │  Lu et approuvé                      │  Lu et approuvé                      │
+  │  Bon pour accord                     │  Bon pour accord                     │
+  └──────────────────────────────────────┴──────────────────────────────────────┘
+
+================================================================================
+  Préparé par : ANDALUS SMART WAY - Ouamane Adam 
+  Date        : 08 Mai 2026
+  Contact     : info@andalussmartway.com — +213 553 114 792
+================================================================================

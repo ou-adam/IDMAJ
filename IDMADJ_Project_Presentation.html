@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IDMADJ.DZ — الوثيقة النهائية وعرض المشروع</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@300;400;600;800&family=Noto+Sans+Arabic:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{--p:#0ea5e9;--pd:#0284c7;--s:#6366f1;--a:#f59e0b;--bg:#0f172a;--cbg:rgba(30,41,59,.7);--gbg:rgba(255,255,255,.03);--gb:rgba(255,255,255,.1);--t:#f8fafc;--tm:#94a3b8;--tr:all .4s cubic-bezier(.4,0,.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans Arabic',sans-serif;background:var(--bg);color:var(--t);line-height:1.7;overflow-x:hidden;scroll-behavior:smooth}
+h1,h2,h3,h4,.brand{font-family:'Outfit','Noto Sans Arabic',sans-serif}
+@keyframes fadeIn{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+.rv{opacity:0;transform:translateY(25px);transition:var(--tr)}.rv.ac{opacity:1;transform:translateY(0)}
+.c{max-width:1200px;margin:0 auto;padding:0 2rem}
+
+/* Header */
+header{position:fixed;top:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(15,23,42,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--gb)}
+nav{display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:1.4rem;font-weight:800;color:var(--p);text-decoration:none}
+.brand span{color:var(--t)}
+.nl{display:flex;gap:1.5rem;list-style:none}
+.nl a{text-decoration:none;color:var(--tm);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;transition:var(--tr)}
+.nl a:hover{color:var(--p)}
+
+/* Buttons */
+.btn{display:inline-block;padding:.8rem 2rem;border-radius:.7rem;font-weight:700;text-decoration:none;transition:var(--tr);cursor:pointer;border:none;font-size:.9rem}
+.bp{background:var(--p);color:#fff;box-shadow:0 8px 20px rgba(14,165,233,.3)}
+.bp:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(14,165,233,.5)}
+.bo{border:1px solid var(--gb);color:var(--t);background:transparent}
+
+/* Sections */
+section{padding:6rem 0}
+.sh{margin-bottom:3rem;text-align:center}
+.sh h2{font-size:2.3rem;margin-bottom:.8rem}
+.sh p{color:var(--tm);font-size:1.05rem;max-width:700px;margin:0 auto}
+
+/* Cards */
+.g{display:grid;gap:1.5rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.cd{background:var(--cbg);border:1px solid var(--gb);border-radius:1.2rem;padding:2rem;transition:var(--tr)}
+.cd:hover{transform:translateY(-6px);border-color:var(--p)}
+.cd h3{font-size:1.2rem;margin-bottom:.7rem}
+.cd p,.cd li{color:var(--tm);font-size:.9rem}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+th{background:rgba(14,165,233,.15);text-align:start;padding:.8rem 1rem;color:var(--p);border-bottom:2px solid var(--p)}
+td{padding:.8rem 1rem;border-bottom:1px solid var(--gb)}
+tr:hover td{background:rgba(255,255,255,.02)}
+
+/* Doc blocks */
+.db{background:var(--gbg);border:1px solid var(--gb);border-radius:1.5rem;padding:2.5rem;margin-bottom:2rem}
+.ds{margin-bottom:2.5rem}
+.ds:last-child{margin-bottom:0}
+.ds h4{color:var(--p);font-size:1.15rem;margin-bottom:1rem;padding-inline-start:1rem;border-inline-start:3px solid var(--p)}
+.dl{list-style:none}
+.dl li{padding:.6rem 0;border-bottom:1px solid var(--gb);display:flex;gap:.8rem;align-items:flex-start}
+.dl li::before{content:'';width:12px;height:12px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230ea5e9' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-size:contain;margin-top:.4rem;flex-shrink:0}
+
+/* Stats */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;background:var(--gbg);border:1px solid var(--gb);border-radius:1.5rem;padding:2rem;margin:2rem 0}
+.si{text-align:center}
+.sn{display:block;font-size:2rem;font-weight:800;color:var(--p)}
+.sl{color:var(--tm);font-size:.75rem;text-transform:uppercase;letter-spacing:1px}
+
+/* Flow diagram */
+.flow{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;padding:1.5rem;background:rgba(14,165,233,.05);border-radius:1rem;margin:1rem 0}
+.flow-step{background:var(--cbg);border:1px solid var(--gb);padding:.6rem 1.2rem;border-radius:.6rem;font-size:.8rem;font-weight:600;white-space:nowrap}
+.flow-arrow{color:var(--p);font-size:1.2rem;font-weight:700;transform:scaleX(-1)}
+
+/* Tabs */
+.tn{display:flex;gap:.5rem;margin-bottom:2rem;background:var(--gbg);padding:.4rem;border-radius:.8rem;width:fit-content;flex-wrap:wrap}
+.tb{padding:.6rem 1.2rem;border-radius:.6rem;background:transparent;border:none;color:var(--tm);font-weight:600;cursor:pointer;transition:var(--tr);font-size:.85rem}
+.tb.ac{background:var(--p);color:#fff}
+.tc{display:none;animation:fadeIn .4s ease}.tc.ac{display:block}
+
+/* Schema box */
+.schema{background:rgba(99,102,241,.05);border:1px solid rgba(99,102,241,.2);border-radius:1rem;padding:2rem;margin:1rem 0}
+.schema h5{color:var(--s);margin-bottom:1rem;font-size:1rem}
+.schema-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem}
+.schema-item{background:var(--cbg);border:1px solid var(--gb);padding:.7rem 1rem;border-radius:.5rem;font-size:.8rem;display:flex;align-items:center;gap:.5rem}
+.schema-item .icon{color:var(--p);font-weight:700}
+
+/* Timeline */
+.tl{position:relative;padding-inline-start:2rem}
+.tl::before{content:'';position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--p),var(--s))}
+.tl-item{position:relative;margin-bottom:2rem;padding-inline-start:1.5rem}
+.tl-item::before{content:'';position:absolute;inset-inline-start:-2.35rem;top:.5rem;width:12px;height:12px;border-radius:50%;background:var(--p);border:2px solid var(--bg)}
+.tl-item h5{color:var(--p);margin-bottom:.3rem}
+.tl-item p{color:var(--tm);font-size:.85rem}
+
+/* Badge */
+.badge{display:inline-block;padding:.3rem .8rem;border-radius:2rem;font-size:.7rem;font-weight:700;margin-inline-end:.5rem}
+.badge-blue{background:rgba(14,165,233,.15);color:var(--p)}
+.badge-purple{background:rgba(99,102,241,.15);color:var(--s)}
+.badge-gold{background:rgba(245,158,11,.15);color:var(--a)}
+
+/* Icons */
+.svg-i{vertical-align:middle;display:inline-block;flex-shrink:0}
+.i-bolt{color:var(--a);margin-inline-end:.5rem}
+.i-check{color:#10b981}
+.i-star{color:var(--p);margin-inline-end:.5rem}
+.i-diamond{color:var(--p);margin-inline-end:.5rem}
+
+/* Footer */
+footer{padding:3rem 0;border-top:1px solid var(--gb);text-align:center;color:var(--tm);font-size:.85rem}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;text-align:center;background:radial-gradient(circle at top right,rgba(99,102,241,.12),transparent),radial-gradient(circle at bottom left,rgba(14,165,233,.12),transparent);padding:8rem 0 4rem}
+.hero h1{font-size:3.5rem;margin-bottom:1rem;background:linear-gradient(to right,#fff,var(--p));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;animation:fadeIn .8s ease}
+.hero>div>p{font-size:1.15rem;color:var(--tm);max-width:750px;margin:0 auto 2rem;animation:fadeIn .8s ease .15s backwards}
+.hbtns{display:flex;gap:1rem;justify-content:center;animation:fadeIn .8s ease .3s backwards}
+
+@media(max-width:768px){
+.hero h1{font-size:2.2rem}
+.nl{display:none}
+.db{padding:1.5rem}
+.g3{grid-template-columns:1fr}
+.flow{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header><div class="c"><nav>
+<a href="#" class="brand">IDMADJ<span>.DZ</span></a>
+<ul class="nl">
+<li><a href="#vision">الرؤية</a></li>
+<li><a href="#pages">الصفحات</a></li>
+<li><a href="#forms">النماذج</a></li>
+<li><a href="#backoffice">لوحة التحكم</a></li>
+<li><a href="#bdd">قاعدة البيانات</a></li>
+<li><a href="#planning">الجدولة</a></li>
+</ul>
+</nav></div></header>
+
+<!-- HERO -->
+<section class="hero">
+<div class="c">
+<span class="badge badge-blue">SMART ACCEL INDUSTRIE 4.0</span>
+<h1>الوثيقة النهائية<br>منصة IDMADJ.DZ</h1>
+<p>تحليل شامل لدفتر الشروط — الرؤية، الهندسة، سير العمل، مخططات البيانات، المواصفات التقنية وجدول التنفيذ.</p>
+<div class="hbtns">
+<a href="#vision" class="btn bp">استكشاف المشروع</a>
+<a href="#pages" class="btn bo">عرض المواصفات</a>
+</div>
+<div class="sg" style="margin-top:3rem">
+<div class="si"><span class="sn">+1000</span><span class="sl">مشارك</span></div>
+<div class="si"><span class="sn">14</span><span class="sl">صفحة ويب</span></div>
+<div class="si"><span class="sn">6</span><span class="sl">نماذج</span></div>
+<div class="si"><span class="sn">17</span><span class="sl">جدول قاعدة بيانات</span></div>
+<div class="si"><span class="sn">19</span><span class="sl">وحدة إدارية</span></div>
+<div class="si"><span class="sn">7</span><span class="sl">أدوار إدارية</span></div>
+<div class="si"><span class="sn">8</span><span class="sl">أنواع بريد</span></div>
+<div class="si"><span class="sn">6 أسابيع</span><span class="sl">المدة</span></div>
+</div>
+</div>
+</section>
+
+<!-- 1. VISION -->
+<section id="vision" class="rv"><div class="c">
+<div class="sh"><span class="badge badge-blue">القسم 1</span><h2>الرؤية العامة للمنصة</h2>
+<p>المنصة الرقمية الرسمية للجلسات الوطنية المفتوحة «إدماج» — من 25 جوان إلى 24 سبتمبر 2026</p></div>
+<div class="db"><div class="ds"><h4>الجهة المنظمة</h4>
+<table><tr><td><strong>المؤسسة</strong></td><td>المؤسسة الجزائرية لدعم الشباب وتنمية المقاولاتية</td></tr>
+<tr><td><strong>المنصة</strong></td><td>WWW.IDMADJ.DZ</td></tr>
+<tr><td><strong>الحدث</strong></td><td>الجلسات الوطنية المفتوحة «إدماج» SMART ACCEL INDUSTRIE 4.0</td></tr>
+<tr><td><strong>الشعار</strong></td><td>محفز الإدماج والجودة في الجزائر 2026</td></tr>
+<tr><td><strong>الفترة</strong></td><td>من 25 جوان إلى 24 سبتمبر 2026</td></tr>
+<tr><td><strong>مكان الافتتاح</strong></td><td>المدرسة العليا للفندقة والإطعام بالجزائر ESHRA</td></tr></table></div>
+<div class="ds"><h4>12 وظيفة مطلوبة</h4>
+<ul class="dl">
+<li>التعريف بالحدث وطنياً ومؤسساتياً.</li>
+<li>استقبال تسجيلات المشاركين والمؤسسات والطلبة والشركات الناشئة.</li>
+<li>إنشاء قاعدة بيانات منظمة للمشاركين.</li>
+<li>إبراز الرعاة والممولين والشركاء الرسميين.</li>
+<li>نشر البرنامج العام والندوات الجهوية والورشات.</li>
+<li>تسيير طلبات المشاركة في جلسات B2B.</li>
+<li>تسيير طلبات المشاركة في هاكاثون Dz-Industry Hack.</li>
+<li>تسيير طلبات المشاركة في مساحة دقيقة لعرض مشروعك 1-Minute Pitch Box.</li>
+<li>نشر حلقات بودكاس إدماج IDMAJ-Tech DZ 4.0.</li>
+<li>توفير فضاء إعلامي للصور، الفيديوهات، البيانات الصحفية، والتغطيات.</li>
+<li>تسهيل التواصل بين الإدارة المنظمة والمشاركين والرعاة.</li>
+<li>توفير لوحة تحكم للإدارة لتسيير المحتوى والتسجيلات والملفات.</li>
+</ul></div>
+<div class="ds"><h4>الفئات المستهدفة</h4>
+<div class="g g2">
+<div class="cd"><h3>المؤسسات الاقتصادية</h3><ul class="dl">
+<li>المؤسسات الكبرى</li><li>المؤسسات الصغيرة والمتوسطة</li><li>الشركات الناشئة</li>
+<li>المناولون الصناعيون</li><li>المخابر التقنية</li><li>مكاتب الدراسات</li></ul></div>
+<div class="cd"><h3>الجهات الرسمية والشريكة</h3><ul class="dl">
+<li>الهيئات الحكومية</li><li>مؤسسات دعم الاستثمار</li>
+<li>البنوك والمؤسسات المالية</li><li>هيئات الاعتماد</li><li>غرف التجارة</li></ul></div>
+<div class="cd"><h3>الرعاة والممولون</h3><ul class="dl">
+<li>الرعاة الرسميون، الذهبيون، الفضيون</li><li>الشركاء الاستراتيجيون</li><li>الممولون والمساهمون</li></ul></div>
+<div class="cd"><h3>المشاركون الأفراد</h3><ul class="dl">
+<li>الخبراء والمحاضرون</li><li>الأساتذة والباحثون</li><li>الطلبة الجامعيون</li>
+<li>المبرمجون والمهندسون</li><li>الصحفيون والإعلاميون</li></ul></div>
+</div></div>
+<div class="ds"><h4>نطاق المشروع — 15 مكوناً</h4>
+<table><thead><tr><th>#</th><th>المكون</th><th>الوصف</th></tr></thead><tbody>
+<tr><td>1</td><td>الواجهة العمومية Front Office</td><td>واجهة موجهة للزوار والمشاركين والرعاة</td></tr>
+<tr><td>2</td><td>لوحة التحكم Back Office</td><td>لوحة تحكم لفريق التنظيم والإدارة</td></tr>
+<tr><td>3</td><td>نظام التسجيل</td><td>تسجيل متقدم حسب نوعية المشارك</td></tr>
+<tr><td>4</td><td>قاعدة البيانات</td><td>المشاركون، المؤسسات، الرعاة</td></tr>
+<tr><td>5</td><td>نظام إدارة المحتوى CMS</td><td>تعديل الصفحات والبرامج والأخبار</td></tr>
+<tr><td>6</td><td>إدارة الرعاة</td><td>وحدة مخصصة للرعاة والشركاء</td></tr>
+<tr><td>7</td><td>إدارة B2B</td><td>طلبات المناولة والفرص</td></tr>
+<tr><td>8</td><td>إدارة الهاكاثون</td><td>وحدة كاملة للهاكاثون</td></tr>
+<tr><td>9</td><td>إدارة Pitch Box</td><td>وحدة كاملة لـ 1-Minute Pitch</td></tr>
+<tr><td>10</td><td>إدارة البودكاست والوسائط</td><td>وحدة كاملة للوسائط</td></tr>
+<tr><td>11</td><td>تصدير البيانات</td><td>Excel وCSV وPDF</td></tr>
+<tr><td>12</td><td>إشعارات البريد</td><td>إرسال تلقائي للإشعارات</td></tr>
+<tr><td>13</td><td>التحليلات Analytics</td><td>ربط أدوات التحليل والإحصائيات</td></tr>
+<tr><td>14</td><td>SEO</td><td>تحسين محركات البحث</td></tr>
+<tr><td>15</td><td>الأمن والنسخ الاحتياطي</td><td>حماية تقنية ونسخ احتياطي</td></tr>
+</tbody></table></div></div>
+</div></section>
+
+<!-- 2. PAGES -->
+<section id="pages" style="background:rgba(99,102,241,.03)"><div class="c rv">
+<div class="sh"><span class="badge badge-purple">القسم 2</span><h2>هيكلة الصفحات الـ 14</h2>
+<p>التفاصيل الكاملة لكل صفحة في الواجهة العمومية</p></div>
+
+<div class="db"><div class="ds"><h4>الصفحة 1 — الرئيسية</h4>
+<p style="color:var(--a);font-weight:600;margin-bottom:1rem"><svg class="svg-i i-bolt" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>الصفحة الأكثر أهمية — يجب أن تكون قوية وحديثة وواضحة</p>
+<div class="g g2">
+<div class="cd"><h3>Header</h3><ul class="dl">
+<li>شعار الحدث + اسم الجهة المنظمة</li>
+<li>روابط الصفحات الرئيسية</li>
+<li>CTA رئيسي: « سجل الآن »</li>
+<li>CTA ثانوي: « حمّل ملف الرعاية »</li></ul></div>
+<div class="cd"><h3>Hero Section</h3><ul class="dl">
+<li>اسم الحدث + الشعار</li>
+<li>التاريخ: 25 جوان 2026</li>
+<li>المكان: ESHRA، الجزائر</li>
+<li>عداد تنازلي (countdown)</li></ul></div>
+<div class="cd"><h3>الأرقام الرئيسية</h3><ul class="dl">
+<li>+1000 مشارك</li><li>+50 مؤسسة مناولة</li>
+<li>04 ندوات جهوية</li><li>50 لقاء B2B</li>
+<li>16 ورشة تكوينية</li><li>20 حلقة بودكاست</li></ul></div>
+<div class="cd"><h3>عناصر أخرى</h3><ul class="dl">
+<li>ملخص أهداف الحدث</li><li>شريط الرعاة</li>
+<li>آخر الأخبار</li><li>روابط التسجيل والاتصال</li></ul></div>
+</div></div>
+
+<div class="ds"><h4>الصفحة 2 — عن إدماج</h4><ul class="dl">
+<li>تعريف بمبادرة إدماج</li>
+<li>الخلفية الاقتصادية: الإدماج الصناعي والمناولة</li>
+<li>العلاقة بالثورة الصناعية الرابعة Industrie 4.0</li>
+<li>الأهداف التفصيلية للمبادرة</li>
+<li>الفئات المستهدفة</li>
+<li>الجهات المنظمة والرعاة والشركاء</li>
+<li>الأثر المتوقع</li></ul></div>
+
+<div class="ds"><h4>الصفحة 3 — البرنامج العام</h4>
+<p style="margin-bottom:1rem;color:var(--tm)">عرض في شكل Timeline — فلترة حسب التاريخ، الولاية، نوع النشاط — تصدير PDF</p>
+<div class="g g2">
+<div class="cd"><h3>أ. الجلسة الافتتاحية (25 جوان)</h3><ul class="dl">
+<li>كلمة الرئيس + وزير الصناعة</li>
+<li>الجلسة 1: خارطة الطريق الرقمية، التشريعات، الصناعة 4.0، الأمن السيبراني</li>
+<li>الجلسة 2: 03 قصص نجاح صناعية</li>
+<li>الجلسة 3: 05 فرص مناولة للمؤسسات الصغيرة والمتوسطة</li>
+<li>إطلاق المنصة + الإعلان عن الهاكاثون</li></ul></div>
+<div class="cd"><h3>ب-ج-د. بقية البرنامج</h3><ul class="dl">
+<li>ب. الندوات الجهوية: ورقلة، عنابة، وهران (25 جوان – 24 سبتمبر)</li>
+<li>ج. هاكاثون Dz-Industry Hack (الجزائر العاصمة)</li>
+<li>د. الاختتام 24 سبتمبر: عشاء أعمال B2B، توقيع عقود، جوائز الهاكاثون، تكريم الرعاة</li></ul></div>
+</div></div>
+
+<div class="ds"><h4>الصفحات 5-6 — الرعاة والشركاء</h4>
+<div class="g g2">
+<div class="cd"><h3>الرعاة والتمويل</h3><ul class="dl">
+<li>التصنيف: رسمي، ذهبي، فضي، برونزي، داعم</li>
+<li>الشعار + رابط الموقع لكل راعٍ</li>
+<li>إمكانية تخصيص صفحة (تعريف، فيديو)</li>
+<li>زر: تحميل ملف الرعاية</li>
+<li>زر: طلب التواصل بخصوص الرعاية</li></ul></div>
+<div class="cd"><h3>الشركاء والهيئات</h3><ul class="dl">
+<li>الشعار + الاسم (عربي وفرنسي)</li>
+<li>وصف قصير</li>
+<li>رابط الموقع الرسمي</li>
+<li>النوع: تنظيم، تنسيق، دعم، تمويل، إعلام، تقني</li></ul></div>
+</div></div>
+
+<div class="ds"><h4>الصفحة 7 — الندوات الجهوية</h4>
+<table><thead><tr><th>الندوة</th><th>الولاية</th><th>المحتوى المعروض</th></tr></thead><tbody>
+<tr><td>الهاكاثون</td><td>الجزائر</td><td rowspan="4">التاريخ، المكان، البرنامج، الورشات، المتدخلون، التسجيل، الخريطة، الصور، الشركاء المحليون</td></tr>
+<tr><td>ندوة الجنوب</td><td>ورقلة</td></tr>
+<tr><td>ندوة الشرق</td><td>عنابة</td></tr>
+<tr><td>ندوة الغرب</td><td>وهران</td></tr>
+</tbody></table>
+<p style="margin-top:1rem;color:var(--tm);font-size:.85rem"><svg class="svg-i i-star" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>خريطة تفاعلية للولايات — فلترة حسب الولاية — أرشفة الندوات المنتهية</p></div>
+
+<div class="ds"><h4>الصفحة 8 — B2B وفرص المناولة</h4>
+<p style="color:var(--a);font-weight:600;margin-bottom:1rem"><svg class="svg-i i-bolt" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>من أهم صفحات المنصة</p>
+<div class="g g2">
+<div class="cd"><h3>أنواع المؤسسات</h3><ul class="dl">
+<li>طالب خدمة يبحث عن مناول</li>
+<li>مناول يعرض خدماته</li>
+<li>مؤسسة تمويل أو دعم</li>
+<li>مخبر أو هيئة مطابقة</li></ul></div>
+<div class="cd"><h3>أنواع الفرص</h3><ul class="dl">
+<li>توريد — تصنيع — صيانة</li>
+<li>مطابقة وجودة — تمويل</li>
+<li>رقمنة — شراكة</li></ul></div>
+</div>
+<div class="flow" style="margin-top:1rem">
+<span class="flow-step">طلب B2B</span><span class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
+<span class="flow-step">تصنيف القطاع</span><span class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
+<span class="flow-step">فلترة الولاية/النوع</span><span class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
+<span class="flow-step">قبول/رفض</span><span class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
+<span class="flow-step">تصدير Excel</span><span class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
+<span class="flow-step">إشعار</span>
+</div>
+<p style="margin-top:1rem;color:var(--tm);font-size:.85rem"><span class="badge badge-blue">المرحلة 1</span> نظام طلبات B2B + لوحة تحكم + تصدير — <span class="badge badge-purple">المرحلة 2</span> مطابقة آلية ذكية (Matchmaking)</p></div>
+
+<div class="ds"><h4>الصفحة 9 — هاكاثون Dz-Industry Hack</h4>
+<p style="margin-bottom:1rem;color:var(--tm)">الشعار: حلول رقمية لسيادة صناعية — Solutions numériques pour une souveraineté industrielle</p>
+<div class="g g2">
+<div class="cd"><h3>محتوى الصفحة</h3><ul class="dl">
+<li>تعريف + شروط المشاركة</li>
+<li>المحور 1: المناولة الذكية</li>
+<li>المحور 2: تتبع الجودة والمطابقة</li>
+<li>المحور 3: صيانة 4.0</li>
+<li>المحور 4: اللوجستيك الأخضر</li>
+<li>الرزنامة، التحكيم، الجوائز، التسجيل</li></ul></div>
+<div class="cd"><h3>لوحة تحكم الهاكاثون</h3><ul class="dl">
+<li>عرض الفرق المسجلة</li>
+<li>التصنيف حسب المحور</li>
+<li>الحالة: مقبول / مرفوض / قيد المعالجة</li>
+<li>تصدير القائمة</li>
+<li>إرسال تعليمات المشاركة</li></ul></div>
+</div></div>
+
+<div class="ds"><h4>الصفحات 10-14 — Pitch Box، بودكاست، الإعلام، الورشات، الاتصال</h4>
+<div class="g g2">
+<div class="cd"><h3>1-Minute Pitch Box</h3><p>10 عروض مصورة ← اختيار أفضل 5 للاختتام. النموذج: الاسم، المؤسسة، القطاع، المرحلة، الوصف (500 حرف)، الاحتياج الرئيسي.</p></div>
+<div class="cd"><h3>بودكاست إدماج Tech DZ 4.0</h3><p>حلقات ترويجية وتعليمية. بطاقة الحلقة: العنوان، الوصف، الضيف، الراعي، فيديو يوتيوب، صوت، مشاركة.</p></div>
+<div class="cd"><h3>الأخبار والمركز الإعلامي</h3><p>أخبار، بيانات، صور، فيديوهات، Press Kit، شعارات للتحميل. التصنيف حسب الفئة + البحث + SEO.</p></div>
+<div class="cd"><h3>الورشات التكوينية</h3><p>5 فئات: الإدماج، الصناعة 4.0، المطابقة، التمويل، متخصص. كل ورشة: العنوان، المحور، الوصف، المؤطر، المقاعد، CTA.</p></div>
+<div class="cd"><h3>اتصل بنا</h3><p>نموذج + بريد + هاتف + عنوان + تواصل اجتماعي + خريطة. 7 أسباب: تسجيل، رعاية، إعلام، B2B، هاكاثون، شراكة، عام.</p></div>
+<div class="cd"><h3>الصفحات القانونية (+5)</h3><p>الخصوصية، شروط الاستخدام، شروط المشاركة، سياسة البيانات، الملكية الفكرية.</p></div>
+</div></div>
+</div>
+</div></section>
+
+<!-- 3. FORMULAIRES & WORKFLOWS -->
+<section id="forms"><div class="c rv">
+<div class="sh"><span class="badge badge-gold">القسم 3</span><h2>النماذج وسير العمل</h2>
+<p>6 نماذج متميزة مع تفاصيل سير العمل والتحقق</p></div>
+
+<div class="db"><div class="ds"><h4>النموذج الرئيسي — التسجيل (8 أنواع)</h4>
+<p style="margin-bottom:1rem;color:var(--a);font-weight:600"><svg class="svg-i i-bolt" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>النموذج يتكيف حسب نوع المشارك المختار</p>
+<div class="g g4">
+<div class="cd" style="padding:1rem"><p style="font-weight:600;color:var(--p)">1.</p><p>فرصة مناولة</p></div>
+<div class="cd" style="padding:1rem"><p style="font-weight:600;color:var(--p)">2.</p><p>الندوات الجهوية</p></div>
+<div class="cd" style="padding:1rem"><p style="font-weight:600;color:var(--p)">3.</p><p>خبير / محاضر</p></div>
+<div class="cd" style="padding:1rem"><p style="font-weight:600;color:var(--p)">4.</p><p>إعلامي</p></div>
+<div class="cd" style="padding:1rem"><p style="font-weight:600;color:var(--p)">5.</p><p>راعٍ / ممول</p></div>
+<div class="cd" style="padding:1rem"><p style="font-weight:600;color:var(--p)">6.</p><p>جلسات B2B</p></div>
+<div class="cd" style="padding:1rem"><p style="font-weight:600;color:var(--p)">7.</p><p>هاكاثون</p></div>
+<div class="cd" style="padding:1rem"><p style="font-weight:600;color:var(--p)">8.</p><p>1-Minute Pitch Box</p></div>
+</div>
+
+<table style="margin-top:2rem"><thead><tr><th>الحقل</th><th>إلزامي</th></tr></thead><tbody>
+<tr><td>اسم المؤسسة</td><td><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td></tr>
+<tr><td>الشكل القانوني</td><td><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td></tr>
+<tr><td>رقم السجل التجاري</td><td>إذا توفر</td></tr>
+<tr><td>رقم التعريف الجبائي (NIF)</td><td>إذا توفر</td></tr>
+<tr><td>القطاع الاقتصادي</td><td><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td></tr>
+<tr><td>النشاط الرئيسي</td><td><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td></tr>
+<tr><td>الولاية + العنوان</td><td><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td></tr>
+<tr><td>البريد الإلكتروني + الهاتف</td><td><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td></tr>
+<tr><td>الموقع الإلكتروني</td><td>اختياري</td></tr>
+<tr><td>اسم المسؤول + المنصب</td><td><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td></tr>
+<tr><td>عدد العمال</td><td><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td></tr>
+<tr><td>الحجم (مصغرة، صغيرة، متوسطة، كبيرة، ناشئة)</td><td><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td></tr>
+<tr><td>النوع (منتجة، مناولة، خدماتية)</td><td><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td></tr>
+</tbody></table>
+
+<h4 style="color:var(--p);margin:2rem 0 1rem;padding-inline-start:1rem;border-inline-start:3px solid var(--p)">مجالات الاهتمام (اختيار متعدد)</h4>
+<ul class="dl">
+<li>الاستفادة من التكوين في الندوات الجهوية</li>
+<li>التسويق للمشروع (Pitch Box 1 min)</li>
+<li>توظيف خبرات في مجال المناولة والجودة</li>
+<li>B2B للشراكة والمناولة في الاختتام</li>
+<li>المشاركة في الهاكاثون</li>
+<li>رعاية وتمويل الحدث</li>
+<li>التغطية الإعلامية</li>
+</ul>
+
+<h4 style="color:var(--p);margin:2rem 0 1rem;padding-inline-start:1rem;border-inline-start:3px solid var(--p)">الملفات المطلوبة (Uploads)</h4>
+<ul class="dl">
+<li>الصورة الشخصية للمسجل</li>
+<li>شعار المؤسسة (اختياري)</li>
+<li>ملف تعريفي PDF (اختياري)</li>
+<li>قبول الشروط وسياسة البيانات</li>
+</ul>
+
+<h4 style="color:var(--p);margin:2rem 0 1rem;padding-inline-start:1rem;border-inline-start:3px solid var(--p)">سير عمل التسجيل</h4>
+<div class="flow">
+<span class="flow-step">الزائر يملأ النموذج</span><span class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
+<span class="flow-step">تأكيد تلقائي بالبريد</span><span class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
+<span class="flow-step">رقم IDMAJ-2026-XXXX</span><span class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
+<span class="flow-step">وصل PDF</span><span class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
+<span class="flow-step">تسجيل في لوحة التحكم</span><span class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
+<span class="flow-step">تصنيف الملف</span>
+</div>
+<p style="margin-top:.8rem;font-size:.85rem;color:var(--tm)">حالات الملف: جديد ← قيد المعالجة ← مقبول / مرفوض / معلومات ناقصة</p>
+</div>
+
+<div class="ds"><h4>نموذج الرعاية</h4>
+<table><thead><tr><th>الحقل</th><th>النوع</th></tr></thead><tbody>
+<tr><td>اسم الشركة</td><td>نص</td></tr>
+<tr><td>اسم المسؤول</td><td>نص</td></tr>
+<tr><td>المنصب</td><td>نص</td></tr>
+<tr><td>الهاتف + البريد</td><td>هاتف / بريد</td></tr>
+<tr><td>نوع الرعاية المطلوبة</td><td>Select</td></tr>
+<tr><td>المبلغ أو طبيعة المساهمة</td><td>نص</td></tr>
+<tr><td>ملاحظات</td><td>Textarea</td></tr>
+</tbody></table></div>
+
+<div class="ds"><h4>نموذج الهاكاثون</h4>
+<table><thead><tr><th>الحقل</th><th>النوع</th></tr></thead><tbody>
+<tr><td>اسم الفريق</td><td>نص</td></tr>
+<tr><td>عدد الأعضاء</td><td>رقم</td></tr>
+<tr><td>اسم قائد الفريق</td><td>نص</td></tr>
+<tr><td>البريد + الهاتف</td><td>بريد / هاتف</td></tr>
+<tr><td>الولاية + التخصص</td><td>Select / نص</td></tr>
+<tr><td>المحور المختار</td><td>Select</td></tr>
+<tr><td>وصف الفكرة</td><td>Textarea</td></tr>
+<tr><td>نموذج أولي موجود؟</td><td>نعم/لا</td></tr>
+<tr><td>رابط GitHub/Portfolio</td><td>رابط (اختياري)</td></tr>
+<tr><td>عرض PDF</td><td>رفع (اختياري)</td></tr>
+</tbody></table></div>
+
+<div class="ds"><h4>نموذج Pitch Box</h4>
+<table><thead><tr><th>الحقل</th><th>النوع</th></tr></thead><tbody>
+<tr><td>اسم صاحب المشروع</td><td>نص</td></tr>
+<tr><td>اسم المؤسسة/المشروع</td><td>نص</td></tr>
+<tr><td>الولاية + القطاع</td><td>Select</td></tr>
+<tr><td>مرحلة المشروع</td><td>Select (فكرة، نموذج، نشاط، توسعة)</td></tr>
+<tr><td>الوصف (500 حرف)</td><td>Textarea</td></tr>
+<tr><td>القيمة المضافة</td><td>Textarea</td></tr>
+<tr><td>الاحتياج الرئيسي</td><td>Select (تمويل، شريك، سوق...)</td></tr>
+<tr><td>رابط فيديو + PDF</td><td>رابط / رفع (اختياري)</td></tr>
+</tbody></table></div>
+</div>
+</div></section>
+
+<!-- 4. BACK OFFICE -->
+<section id="backoffice" style="background:rgba(99,102,241,.03)"><div class="c rv">
+<div class="sh"><span class="badge badge-purple">القسم 4</span><h2>لوحة التحكم — 19 وحدة</h2>
+<p>لوحة تحكم إدارية كاملة مع 7 أدوار هرمية</p></div>
+
+<div class="db"><div class="ds"><h4>7 أدوار وصلاحيات</h4>
+<table><thead><tr><th>الدور</th><th>بالعربية</th><th>الصلاحيات</th></tr></thead><tbody>
+<tr><td><strong>Super Admin</strong></td><td>مدير عام</td><td>جميع الصلاحيات، إدارة الحسابات، تصدير كامل، إعدادات</td></tr>
+<tr><td><strong>Content Manager</strong></td><td>مسؤول المحتوى</td><td>الصفحات، الأخبار، الصور/الفيديوهات</td></tr>
+<tr><td><strong>Registration Manager</strong></td><td>مسؤول التسجيلات</td><td>التسجيلات، القبول/الرفض، تصدير القوائم</td></tr>
+<tr><td><strong>Sponsors Manager</strong></td><td>مسؤول الرعاة</td><td>الرعاة، طلبات الرعاية، الشعارات</td></tr>
+<tr><td><strong>Responsable B2B</strong></td><td>مسؤول B2B</td><td>طلبات اللقاءات، التصنيف، التصدير</td></tr>
+<tr><td><strong>Resp. Hackathon</strong></td><td>مسؤول الهاكاثون</td><td>الفرق، الملفات، التعليمات</td></tr>
+<tr><td><strong>Resp. Médias</strong></td><td>مسؤول الإعلام</td><td>البيانات الصحفية، الصور/الفيديوهات، البودكاست</td></tr>
+</tbody></table></div>
+
+<div class="ds"><h4>19 وظيفة في لوحة التحكم</h4>
+<div class="g g3">
+<div class="cd"><h3>إدارة المحتوى</h3><ul class="dl">
+<li>إدارة الصفحات</li><li>إدارة البرنامج</li>
+<li>إدارة الأخبار</li><li>إدارة مكتبة الوسائط</li></ul></div>
+<div class="cd"><h3>إدارة التسجيلات</h3><ul class="dl">
+<li>إدارة Inscriptions</li><li>إدارة الرعاة</li>
+<li>إدارة الشركاء</li><li>إدارة الورشات</li></ul></div>
+<div class="cd"><h3>وحدات متخصصة</h3><ul class="dl">
+<li>إدارة B2B</li><li>إدارة الهاكاثون</li>
+<li>إدارة Pitch Box</li><li>إدارة البودكاست</li></ul></div>
+<div class="cd"><h3>النظام</h3><ul class="dl">
+<li>إدارة الندوات الجهوية</li><li>تصدير Excel/CSV</li>
+<li>إحصائيات عامة</li><li>الرسائل الواردة</li>
+<li>إدارة المستخدمين</li>
+<li>تسجيل دخول آمن</li><li>النسخ الاحتياطي</li></ul></div>
+</div></div>
+
+<div class="ds"><h4>إحصائيات Dashboard</h4>
+<div class="g g4">
+<div class="cd" style="text-align:center;padding:1.2rem"><p style="font-weight:700;color:var(--p)">إجمالي التسجيلات</p><p>عداد عام</p></div>
+<div class="cd" style="text-align:center;padding:1.2rem"><p style="font-weight:700;color:var(--p)">حسب الولاية</p><p>رسم بياني</p></div>
+<div class="cd" style="text-align:center;padding:1.2rem"><p style="font-weight:700;color:var(--p)">حسب القطاع</p><p>رسم بياني</p></div>
+<div class="cd" style="text-align:center;padding:1.2rem"><p style="font-weight:700;color:var(--p)">حسب الحالة</p><p>توزيع</p></div>
+<div class="cd" style="text-align:center;padding:1.2rem"><p style="font-weight:700;color:var(--p)">طلبات B2B</p><p>الإجمالي</p></div>
+<div class="cd" style="text-align:center;padding:1.2rem"><p style="font-weight:700;color:var(--p)">الهاكاثون</p><p>إجمالي الفرق</p></div>
+<div class="cd" style="text-align:center;padding:1.2rem"><p style="font-weight:700;color:var(--p)">الصفحات المزارة</p><p>التحليلات</p></div>
+<div class="cd" style="text-align:center;padding:1.2rem"><p style="font-weight:700;color:var(--p)">مصادر الزوار</p><p>التحليلات</p></div>
+</div></div>
+</div>
+</div></section>
+
+<!-- 5. BASE DE DONNÉES -->
+<section id="bdd"><div class="c rv">
+<div class="sh"><span class="badge badge-blue">القسم 5</span><h2>قاعدة البيانات — 17 جدولاً</h2>
+<p>المخطط العلاقي الكامل للمنصة</p></div>
+
+<div class="db">
+<div class="schema"><h5>مخطط الجداول</h5>
+<div class="schema-grid">
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> المستخدمون الإداريون</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> المشاركون</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> المؤسسات</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> التسجيلات</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> الرعاة</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> الشركاء</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> الندوات الجهوية</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> الورشات</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> جلسات B2B</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> طلبات الهاكاثون</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> طلبات Pitch Box</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> المقالات والأخبار</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> الوسائط</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> البودكاست</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> الرسائل الواردة</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> سجلات النشاط</div>
+<div class="schema-item"><svg class="svg-i i-diamond" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> إعدادات الموقع</div>
+</div></div>
+
+<div class="ds"><h4>قواعد قاعدة البيانات</h4>
+<ul class="dl">
+<li>بيانات <strong>قابلة للتصدير</strong> (Excel, CSV, PDF)</li>
+<li><strong>منع التكرار</strong> عبر البريد أو الهاتف</li>
+<li><strong>طابع زمني</strong> لكل تسجيل (التاريخ + الساعة)</li>
+<li>حفظ <strong>الحالة</strong> لكل طلب</li>
+<li>تسجيل <strong>مصدر التسجيل</strong></li>
+</ul></div>
+</div>
+</div></section>
+
+<!-- 6. TECHNIQUE & SÉCURITÉ -->
+<section id="tech" style="background:rgba(99,102,241,.03)"><div class="c rv">
+<div class="sh"><span class="badge badge-purple">القسم 6</span><h2>المتطلبات التقنية</h2>
+<p>التصميم، الأداء، الأمن، SEO والبريد الإلكتروني</p></div>
+
+<div class="db">
+<div class="ds"><h4>الهوية البصرية</h4>
+<div class="g g2">
+<div class="cd"><h3>لوحة الألوان</h3>
+<div style="display:flex;gap:.5rem;margin:1rem 0">
+<div style="width:50px;height:50px;background:#1e3a5f;border-radius:.5rem" title="أزرق داكن"></div>
+<div style="width:50px;height:50px;background:#0ea5e9;border-radius:.5rem" title="سيان"></div>
+<div style="width:50px;height:50px;background:#6b7280;border-radius:.5rem" title="رمادي معدني"></div>
+<div style="width:50px;height:50px;background:#f59e0b;border-radius:.5rem" title="ذهبي"></div>
+</div>
+<p>أزرق داكن (ثقة) · سيان (ابتكار) · رمادي (صناعة) · ذهبي (جودة)</p></div>
+<div class="cd"><h3>الخطوط والتصميم</h3><ul class="dl">
+<li>خط عربي واضح وحديث (RTL)</li>
+<li>دعم الفرنسية (LTR)</li>
+<li>تصميم مؤسساتي، حديث، متجاوب</li>
+<li>يعكس: الإدماج، الجودة، الصناعة 4.0</li></ul></div>
+</div></div>
+
+<div class="ds"><h4>الأمن — 10 إجراءات إلزامية</h4>
+<div class="g g2">
+<div class="cd"><ul class="dl">
+<li><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> شهادة SSL</li><li><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> دخول إداري آمن</li>
+<li><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> تشفير كلمات المرور</li><li><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> حماية Brute Force</li><li><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> كابتشا النماذج</li></ul></div>
+<div class="cd"><ul class="dl">
+<li><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> حماية SQL Injection, XSS, CSRF</li><li><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> تحديد صلاحيات المستخدمين</li>
+<li><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> سجل النشاط (Logs)</li><li><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> نسخ احتياطي دوري</li><li><svg class="svg-i i-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> تحديثات أمنية</li></ul></div>
+</div></div>
+
+<div class="ds"><h4>SEO</h4><ul class="dl">
+<li>روابط SEO-friendly</li><li>Meta title + Meta description لكل صفحة</li>
+<li>Alt images + Sitemap XML + robots.txt</li>
+<li>كلمات مفتاحية: إدماج، SMART ACCEL INDUSTRIE 4.0، IDMADJ، المناولة في الجزائر</li></ul></div>
+
+<div class="ds"><h4>8 أنواع من رسائل البريد الآلية</h4>
+<table><thead><tr><th>#</th><th>البريد الإلكتروني</th><th>المحفز (Trigger)</th></tr></thead><tbody>
+<tr><td>1</td><td>تأكيد التسجيل</td><td>بعد التسجيل مباشرة</td></tr>
+<tr><td>2</td><td>قبول المشاركة</td><td>عند قبول الإدارة</td></tr>
+<tr><td>3</td><td>رفض / طلب معلومات</td><td>قرار الإدارة</td></tr>
+<tr><td>4</td><td>تذكير بالحدث</td><td>قبل الفعالية</td></tr>
+<tr><td>5</td><td>تأكيد B2B</td><td>قبول طلب B2B</td></tr>
+<tr><td>6</td><td>تعليمات الهاكاثون</td><td>بعد القبول</td></tr>
+<tr><td>7</td><td>للرعاة المحتملين</td><td>التنقيب</td></tr>
+<tr><td>8</td><td>شكر بعد الحدث</td><td>بعد الاختتام</td></tr>
+</tbody></table>
+<p style="margin-top:1rem;color:var(--tm);font-size:.85rem">المرسل: IDMADJ 2026 · العناوين: contact@idmadj.dz / registration@idmadj.dz</p></div>
+</div>
+</div></section>
+
+<!-- 7. PLANNING -->
+<section id="planning"><div class="c rv">
+<div class="sh"><span class="badge badge-gold">القسم 7</span><h2>الجدولة والتسليمات</h2>
+<p>جدول التنفيذ في 6 أسابيع مع مراحل MVP</p></div>
+
+<div class="db">
+<div class="ds"><h4>جدول التنفيذ</h4>
+<div class="tl">
+<div class="tl-item"><h5>الأسبوع 1 — التحضير</h5><p>مراجعة دفتر الشروط، جمع الملفات، الهوية البصرية، اختيار الاستضافة، هيكلة قاعدة البيانات.</p></div>
+<div class="tl-item"><h5>الأسبوع 2 — التصميم</h5><p>تصميم الرئيسية، التسجيل، البرنامج، الرعاة. اعتماد العميل.</p></div>
+<div class="tl-item"><h5>الأسابيع 3-4 — التطوير</h5><p>الواجهة العمومية، لوحة التحكم، النماذج، إدارة المحتوى، تصدير البيانات.</p></div>
+<div class="tl-item"><h5>الأسبوع 5 — الاختبار</h5><p>النماذج، البريد، الجوال، لوحة التحكم، المحتوى، الأخطاء.</p></div>
+<div class="tl-item"><h5>الأسبوع 6 — الإطلاق</h5><p>ربط الدومين، SSL، الإطلاق الرسمي، تدريب الفريق، تسليم الحسابات.</p></div>
+</div></div>
+
+<div class="ds"><h4>المرحلة 1 — MVP (16 عنصراً)</h4>
+<div class="g g4">
+<div class="cd" style="padding:1rem;text-align:center"><p>الصفحة الرئيسية</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>عن الحدث</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>البرنامج</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>التسجيل</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>الرعاة</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>الشركاء</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>الندوات</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>B2B</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>الهاكاثون</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>Pitch Box</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>الأخبار</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>الاتصال</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>لوحة التحكم</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>تصدير Excel</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>البريد الآلي</p></div>
+<div class="cd" style="padding:1rem;text-align:center"><p>SSL والأمن</p></div>
+</div></div>
+
+<div class="ds"><h4>المرحلة 2 — متقدمة (10 وظائف)</h4>
+<ul class="dl">
+<li>مطابقة B2B آلية ذكية</li>
+<li>فضاء خاص للمشاركين</li>
+<li>QR Code لكل مشارك</li>
+<li>نظام حضور (scan QR)</li>
+<li>تطبيق ويب تقدمي (PWA)</li>
+<li>إحصائيات متقدمة</li>
+<li>دعم اللغتين الفرنسية والإنجليزية</li>
+<li>أرشيف الفيديو والمحاضرات</li>
+<li>شهادات إلكترونية</li>
+<li>نظام تقييم الورشات</li>
+</ul></div>
+
+<div class="ds"><h4>14 تسليماً من المطور</h4>
+<table><thead><tr><th>#</th><th>التسليم</th></tr></thead><tbody>
+<tr><td>1</td><td>موقع إلكتروني يعمل على WWW.IDMADJ.DZ</td></tr>
+<tr><td>2</td><td>لوحة تحكم كاملة</td></tr>
+<tr><td>3</td><td>قاعدة بيانات منظمة</td></tr>
+<tr><td>4</td><td>نماذج تسجيل فعالة</td></tr>
+<tr><td>5</td><td>نظام تصدير Excel/CSV</td></tr>
+<tr><td>6</td><td>نظام بريد إلكتروني تلقائي</td></tr>
+<tr><td>7</td><td>صفحات المحتوى المطلوبة</td></tr>
+<tr><td>8</td><td>تصميم متجاوب للجوال</td></tr>
+<tr><td>9</td><td>شهادة SSL</td></tr>
+<tr><td>10</td><td>إعدادات SEO الأساسية</td></tr>
+<tr><td>11</td><td>دليل استعمال للفريق</td></tr>
+<tr><td>12</td><td>حسابات إدارية بالصلاحيات</td></tr>
+<tr><td>13</td><td>أول نسخة احتياطية</td></tr>
+<tr><td>14</td><td>ملف تقني (الاستضافة، الدخول)</td></tr>
+</tbody></table></div>
+
+<div class="ds"><h4>التنقل — القائمة الرئيسية</h4>
+<div class="flow">
+<span class="flow-step">الرئيسية</span>
+<span class="flow-step">عن إدماج</span>
+<span class="flow-step">البرنامج</span>
+<span class="flow-step">الندوات الجهوية</span>
+<span class="flow-step">التسجيل</span>
+<span class="flow-step">B2B</span>
+<span class="flow-step">Hack</span>
+<span class="flow-step">Pitch</span>
+<span class="flow-step">بودكاست</span>
+<span class="flow-step">الرعاة</span>
+<span class="flow-step">إعلامي</span>
+<span class="flow-step">اتصل بنا</span>
+</div></div>
+
+<div class="ds"><h4>أزرار الحث على الفعل (CTA)</h4>
+<table><thead><tr><th>العربية</th><th>الفرنسية</th></tr></thead><tbody>
+<tr><td>سجل الآن</td><td>Inscrivez-vous maintenant</td></tr>
+<tr><td>شارك في B2B</td><td>Participez au B2B</td></tr>
+<tr><td>انضم إلى الهاكاثون</td><td>Rejoignez le hackathon</td></tr>
+<tr><td>اعرض مشروعك في دقيقة</td><td>Présentez votre projet en 1 min</td></tr>
+<tr><td>كن راعياً للحدث</td><td>Devenez sponsor</td></tr>
+<tr><td>حمّل البرنامج</td><td>Téléchargez le programme</td></tr>
+</tbody></table></div>
+</div>
+</div></section>
+
+<footer><div class="c"><p>&copy; 2026 IDMADJ.DZ — الوثائق الاستراتيجية الرسمية</p></div></footer>
+
+<script>
+const observer=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('ac')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>observer.observe(el));
+function openTab(evt,id){
+document.querySelectorAll('.tc').forEach(t=>{t.style.display='none';t.classList.remove('ac')});
+document.querySelectorAll('.tb').forEach(b=>b.classList.remove('ac'));
+document.getElementById(id).style.display='block';
+document.getElementById(id).classList.add('ac');
+evt.currentTarget.classList.add('ac');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IDMADJ.DZ — Demande de Contenus au Client (V2)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --secondary: #6366f1;
+    --accent: #f59e0b;
+    --bg: #ffffff;
+    --card-bg: #f8fafc;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --text-light: #94a3b8;
+    --success: #10b981;
+    --danger: #ef4444;
+    --emerald: #059669;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 14px;
+  }
+
+  html[dir="rtl"] body {
+    font-family: 'Noto Kufi Arabic', 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+  html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] h4 {
+    font-family: 'Noto Kufi Arabic', 'Outfit', sans-serif;
+  }
+
+  /* ── Language Selector ── */
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 2rem;
+    padding: .25rem;
+    backdrop-filter: blur(8px);
+  }
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .85rem;
+    border-radius: 1.5rem;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,.7);
+    font-size: .8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s ease;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .lang-btn:hover {
+    color: white;
+    background: rgba(255,255,255,.1);
+  }
+  .lang-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 2px 8px rgba(14,165,233,.4);
+  }
+  .lang-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  /* ── Print Styles ── */
+  @media print {
+    body { font-size: 11px; line-height: 1.5; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .header-bar { position: static; background: white; border-bottom: 3px solid var(--primary); }
+    .container { max-width: 100%; padding: 0 1rem; }
+    .page-section { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; }
+    .question-block { break-inside: avoid; }
+    .answer-zone { border: 1px solid #ccc; min-height: 60px; }
+    .toc { break-after: always; }
+  }
+
+  /* ── Header ── */
+  .header-bar {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+  }
+  .header-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: .5rem;
+  }
+  .header-bar h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: .3rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+  .header-bar h1 .icon-inline {
+    flex-shrink: 0;
+  }
+  .header-bar .subtitle {
+    font-size: 1rem;
+    opacity: .8;
+    font-weight: 300;
+  }
+  .header-bar .meta-row {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    font-size: .85rem;
+    flex-wrap: wrap;
+  }
+  .header-bar .meta-item {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    opacity: .9;
+  }
+  .header-bar .meta-item strong {
+    color: var(--accent);
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+  /* ── Intro Block ── */
+  .intro-block {
+    background: linear-gradient(135deg, rgba(14,165,233,.08), rgba(99,102,241,.08));
+    border: 1px solid rgba(14,165,233,.2);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .intro-block h2 {
+    color: var(--primary-dark);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .intro-block p {
+    color: var(--text-muted);
+    margin-bottom: .5rem;
+  }
+  .intro-block ul {
+    margin: 1rem 0 0 1.5rem;
+    color: var(--text-muted);
+  }
+  html[dir="rtl"] .intro-block ul {
+    margin: 1rem 1.5rem 0 0;
+  }
+  .intro-block ul li { margin-bottom: .3rem; }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+  .toc h3 {
+    font-size: 1.2rem;
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--primary);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+  .toc-list {
+    list-style: none;
+    counter-reset: toc-counter;
+  }
+  .toc-list li {
+    counter-increment: toc-counter;
+    padding: .5rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+  }
+  .toc-list li::before {
+    content: counter(toc-counter, decimal-leading-zero);
+    font-weight: 700;
+    color: var(--primary);
+    font-size: .85rem;
+    min-width: 28px;
+  }
+  .toc-list li:last-child { border-bottom: none; }
+  .toc-list a { color: var(--text); text-decoration: none; font-weight: 500; }
+  .toc-list a:hover { color: var(--primary); }
+  .question-count {
+    margin-left: auto;
+    background: rgba(14,165,233,.1);
+    color: var(--primary);
+    padding: .2rem .6rem;
+    border-radius: 1rem;
+    font-size: .75rem;
+    font-weight: 600;
+  }
+  html[dir="rtl"] .question-count {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  /* ── Page Section ── */
+  .page-section {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .page-header {
+    background: linear-gradient(135deg, #0f172a, #1e3a5f);
+    color: white;
+    padding: 1.2rem 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .page-number {
+    background: var(--primary);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: .9rem;
+    flex-shrink: 0;
+  }
+  .page-header h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .page-header .page-ar {
+    font-size: .85rem;
+    opacity: .7;
+    font-weight: 300;
+  }
+  .page-body { padding: 1.8rem; }
+
+  /* ── Context Block ── */
+  .context-block {
+    background: rgba(245,158,11,.06);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 .5rem .5rem 0;
+    font-size: .85rem;
+    color: var(--text-muted);
+  }
+  html[dir="rtl"] .context-block {
+    border-left: none;
+    border-right: 3px solid var(--accent);
+    border-radius: .5rem 0 0 .5rem;
+  }
+  .context-block strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: .3rem;
+  }
+
+  /* ── Question Block ── */
+  .question-block {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--border);
+  }
+  .question-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .q-label {
+    display: flex;
+    align-items: flex-start;
+    gap: .6rem;
+    margin-bottom: .6rem;
+  }
+  .q-number {
+    background: var(--primary);
+    color: white;
+    font-size: .7rem;
+    font-weight: 700;
+    padding: .2rem .5rem;
+    border-radius: .3rem;
+    white-space: nowrap;
+    margin-top: .15rem;
+  }
+  .q-text {
+    font-weight: 600;
+    color: var(--text);
+    font-size: .95rem;
+  }
+  .q-hint {
+    color: var(--text-light);
+    font-size: .8rem;
+    margin-left: 2.8rem;
+    margin-bottom: .6rem;
+    font-style: italic;
+    display: flex;
+    align-items: flex-start;
+    gap: .35rem;
+  }
+  html[dir="rtl"] .q-hint {
+    margin-left: 0;
+    margin-right: 2.8rem;
+  }
+  .q-hint .hint-icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--accent);
+  }
+
+  /* ── Answer Zone ── */
+  .answer-zone {
+    background: var(--card-bg);
+    border: 1px dashed var(--border);
+    border-radius: .5rem;
+    min-height: 80px;
+    padding: .8rem 1rem;
+    margin-left: 2.8rem;
+    color: var(--text-light);
+    font-size: .8rem;
+  }
+  html[dir="rtl"] .answer-zone {
+    margin-left: 0;
+    margin-right: 2.8rem;
+  }
+  .answer-zone.small { min-height: 50px; }
+  .answer-zone.large { min-height: 120px; }
+
+  /* ── Tags ── */
+  .tag {
+    display: inline-block;
+    padding: .15rem .6rem;
+    border-radius: 1rem;
+    font-size: .7rem;
+    font-weight: 600;
+    margin-right: .3rem;
+    margin-bottom: .3rem;
+  }
+  html[dir="rtl"] .tag {
+    margin-right: 0;
+    margin-left: .3rem;
+  }
+  .tag-required { background: rgba(239,68,68,.1); color: var(--danger); }
+  .tag-optional { background: rgba(16,185,129,.1); color: var(--success); }
+  .tag-file { background: rgba(99,102,241,.1); color: var(--secondary); }
+  .tag-bilingual { background: rgba(245,158,11,.1); color: var(--accent); }
+
+  /* ── Sub-section ── */
+  .sub-section {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--border);
+  }
+  .sub-section h4 {
+    color: var(--secondary);
+    font-size: .95rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ── Print Button ── */
+  .print-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 3rem;
+    font-weight: 700;
+    font-size: .9rem;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(14,165,233,.4);
+    transition: all .3s ease;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+  .print-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(14,165,233,.5);
+  }
+
+  /* ── Summary Table ── */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: .85rem;
+  }
+  .summary-table th {
+    background: var(--primary);
+    color: white;
+    text-align: left;
+    padding: .7rem 1rem;
+  }
+  html[dir="rtl"] .summary-table th {
+    text-align: right;
+  }
+  .summary-table td {
+    padding: .6rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .summary-table tr:hover td { background: rgba(14,165,233,.03); }
+  .summary-table tr:nth-child(even) td { background: var(--card-bg); }
+
+  /* ── Footer ── */
+  .doc-footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    border-top: 2px solid var(--border);
+    color: var(--text-muted);
+    font-size: .85rem;
+  }
+
+  .important-note {
+    background: rgba(239,68,68,.06);
+    border: 1px solid rgba(239,68,68,.2);
+    border-radius: .8rem;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: .85rem;
+    display: flex;
+    align-items: flex-start;
+    gap: .6rem;
+  }
+  .important-note .warn-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--danger);
+  }
+  .important-note strong { color: var(--danger); }
+
+  .info-note {
+    background: rgba(5,150,105,.06);
+    border: 1px solid rgba(5,150,105,.2);
+    border-radius: .8rem;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: .85rem;
+    display: flex;
+    align-items: flex-start;
+    gap: .6rem;
+  }
+  .info-note .info-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--emerald);
+  }
+  .info-note strong { color: var(--emerald); }
+
+  /* ── Inline icons ── */
+  .icon-inline {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+  }
+
+  /* ── Check icon for recap ── */
+  .check-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── RTL overrides ── */
+  html[dir="rtl"] .header-top-row {
+    flex-direction: row-reverse;
+  }
+  html[dir="rtl"] .meta-row {
+    direction: rtl;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ HEADER ═══════════════════ -->
+<div class="header-bar no-print-bg">
+  <div class="container">
+    <div class="header-top-row">
+      <div>
+        <h1>
+          <span class="icon-inline">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+          </span>
+          <span data-lang-fr>IDMADJ.DZ — Demande de Contenus</span>
+          <span data-lang-ar style="display:none">IDMADJ.DZ — طلب المحتويات</span>
+        </h1>
+        <p class="subtitle">
+          <span data-lang-fr>Document de collecte des contenus pour le site web simplifié — Conformément au nouveau cahier des charges</span>
+          <span data-lang-ar style="display:none">وثيقة جمع المحتويات للموقع الإلكتروني المبسط — وفقاً لدفتر الشروط الجديد</span>
+        </p>
+      </div>
+      <div class="lang-switcher no-print">
+        <button class="lang-btn active" id="btn-fr" onclick="switchLang('fr')" title="Français">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          FR
+        </button>
+        <button class="lang-btn" id="btn-ar" onclick="switchLang('ar')" title="العربية">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          AR
+        </button>
+      </div>
+    </div>
+    <div class="meta-row">
+      <span class="meta-item"><strong><span data-lang-fr>Projet :</span><span data-lang-ar style="display:none">المشروع :</span></strong> <span data-lang-fr>Site web IDMADJ.DZ (version simplifiée)</span><span data-lang-ar style="display:none">موقع IDMADJ.DZ (نسخة مبسطة)</span></span>
+      <span class="meta-item"><strong><span data-lang-fr>Événement :</span><span data-lang-ar style="display:none">الحدث :</span></strong> SMART ACCEL INDUSTRIE 4.0</span>
+      <span class="meta-item"><strong><span data-lang-fr>Date :</span><span data-lang-ar style="display:none">التاريخ :</span></strong> <span data-lang-fr>Juillet 2026</span><span data-lang-ar style="display:none">جويلية 2026</span></span>
+      <span class="meta-item"><strong><span data-lang-fr>Version :</span><span data-lang-ar style="display:none">الإصدار :</span></strong> 2.0</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════ INTRO ═══════════════════ -->
+<div class="intro-block">
+  <h2>
+    <span data-lang-fr>Objet de ce document</span>
+    <span data-lang-ar style="display:none">موضوع هذه الوثيقة</span>
+  </h2>
+  <p>
+    <span data-lang-fr>Ce document liste <strong>tous les contenus textuels, visuels et documents</strong> que le client doit fournir pour la réalisation du site web simplifié IDMADJ.DZ, conformément au <strong>nouveau cahier des charges</strong>.</span>
+    <span data-lang-ar style="display:none">تسرد هذه الوثيقة <strong>جميع المحتويات النصية والبصرية والمستندات</strong> التي يجب على العميل تقديمها لإنجاز الموقع الإلكتروني المبسط IDMADJ.DZ، وفقاً <strong>لدفتر الشروط الجديد</strong>.</span>
+  </p>
+  <p>
+    <span data-lang-fr>Le site est structuré en <strong>5 sections principales</strong> : Accueil (Hero), À propos, Programme, Centre de presse, et Formulaire d'inscription unifié. Veuillez :</span>
+    <span data-lang-ar style="display:none">الموقع مُهيكل في <strong>5 أقسام رئيسية</strong> : الرئيسية (Hero)، عن الجلسات، البرنامج، المركز الإعلامي، واستمارة التسجيل الموحدة. يرجى :</span>
+  </p>
+  <ul>
+    <li><span data-lang-fr>Répondre à <strong>toutes les questions marquées <span class="tag tag-required">OBLIGATOIRE</span></strong></span><span data-lang-ar style="display:none">الإجابة على <strong>جميع الأسئلة المميزة بعلامة <span class="tag tag-required">إلزامي</span></strong></span></li>
+    <li><span data-lang-fr>Les questions marquées <span class="tag tag-optional">OPTIONNEL</span> sont recommandées mais non bloquantes</span><span data-lang-ar style="display:none">الأسئلة المميزة بعلامة <span class="tag tag-optional">اختياري</span> موصى بها لكنها غير إلزامية</span></li>
+    <li><span data-lang-fr>Les questions marquées <span class="tag tag-file">FICHIER</span> nécessitent un fichier joint</span><span data-lang-ar style="display:none">الأسئلة المميزة بعلامة <span class="tag tag-file">ملف</span> تتطلب ملفاً مرفقاً</span></li>
+    <li><span data-lang-fr>Les questions marquées <span class="tag tag-bilingual">BILINGUE AR/FR</span> nécessitent le texte dans les deux langues</span><span data-lang-ar style="display:none">الأسئلة المميزة بعلامة <span class="tag tag-bilingual">ثنائي اللغة عر/فر</span> تتطلب النص باللغتين</span></li>
+    <li><span data-lang-fr><strong>Imprimer ce document en PDF</strong> via le bouton en bas à droite, le remplir, et le renvoyer</span><span data-lang-ar style="display:none"><strong>طباعة هذه الوثيقة بصيغة PDF</strong> عبر الزر أسفل اليمين، ملؤها، ثم إعادة إرسالها</span></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════ TABLE OF CONTENTS ═══════════════════ -->
+<div class="toc">
+  <h3>
+    <span class="icon-inline">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    </span>
+    <span data-lang-fr>Table des matières</span>
+    <span data-lang-ar style="display:none">فهرس المحتويات</span>
+  </h3>
+  <ol class="toc-list">
+    <li><a href="#s0"><span data-lang-fr>Informations générales & Identité visuelle</span><span data-lang-ar style="display:none">المعلومات العامة والهوية البصرية</span></a><span class="question-count"><span data-lang-fr>10 questions</span><span data-lang-ar style="display:none">10 أسئلة</span></span></li>
+    <li><a href="#s1"><span data-lang-fr>Section Accueil — Hero & Navigation (الرئيسية)</span><span data-lang-ar style="display:none">قسم الرئيسية — العرض البصري والتنقل</span></a><span class="question-count"><span data-lang-fr>8 questions</span><span data-lang-ar style="display:none">8 أسئلة</span></span></li>
+    <li><a href="#s2"><span data-lang-fr>Section À propos — عن الجلسات</span><span data-lang-ar style="display:none">قسم عن الجلسات</span></a><span class="question-count"><span data-lang-fr>6 questions</span><span data-lang-ar style="display:none">6 أسئلة</span></span></li>
+    <li><a href="#s3"><span data-lang-fr>Section Programme — البرنامج العام</span><span data-lang-ar style="display:none">قسم البرنامج العام</span></a><span class="question-count"><span data-lang-fr>6 questions</span><span data-lang-ar style="display:none">6 أسئلة</span></span></li>
+    <li><a href="#s4"><span data-lang-fr>Section Centre de presse — المركز الإعلامي</span><span data-lang-ar style="display:none">قسم المركز الإعلامي</span></a><span class="question-count"><span data-lang-fr>5 questions</span><span data-lang-ar style="display:none">5 أسئلة</span></span></li>
+    <li><a href="#s5"><span data-lang-fr>Formulaire d'inscription unifié — استمارة التسجيل</span><span data-lang-ar style="display:none">استمارة التسجيل الموحدة</span></a><span class="question-count"><span data-lang-fr>6 questions</span><span data-lang-ar style="display:none">6 أسئلة</span></span></li>
+    <li><a href="#s6"><span data-lang-fr>Rédactions & textes légaux</span><span data-lang-ar style="display:none">النصوص والصفحات القانونية</span></a><span class="question-count"><span data-lang-fr>4 questions</span><span data-lang-ar style="display:none">4 أسئلة</span></span></li>
+    <li><a href="#s7"><span data-lang-fr>Lوحة التحكم — Back Office & Emails</span><span data-lang-ar style="display:none">لوحة التحكم والرسائل الآلية</span></a><span class="question-count"><span data-lang-fr>4 questions</span><span data-lang-ar style="display:none">4 أسئلة</span></span></li>
+  </ol>
+</div>
+
+<div class="info-note">
+  <span class="info-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+  </span>
+  <div>
+    <span data-lang-fr><strong>Note — Nouveau cahier des charges :</strong> Le site est conçu comme un <strong>site simplifié (One-Page ou quelques pages)</strong>. Il ne s'agit plus de 14 pages complètes mais de <strong>5 sections principales</strong> avec un formulaire d'inscription unique et une base de données exportable en Excel. Ce document est adapté à cette nouvelle structure.</span>
+    <span data-lang-ar style="display:none"><strong>ملاحظة — دفتر الشروط الجديد :</strong> صُمّم الموقع كـ <strong>موقع مبسط (صفحة واحدة أو صفحات قليلة)</strong>. لم يعد 14 صفحة كاملة بل <strong>5 أقسام رئيسية</strong> مع استمارة تسجيل موحدة وقاعدة بيانات قابلة للتصدير بصيغة Excel. هذه الوثيقة مكيّفة مع هذه الهيكلة الجديدة.</span>
+  </div>
+</div>
+
+<div class="important-note">
+  <span class="warn-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </span>
+  <div>
+    <span data-lang-fr><strong>Note importante :</strong> Ce document couvre <strong>8 sections</strong> pour un total d'environ <strong>49 questions</strong>. Nous recommandons de traiter les sections par priorité : <strong>Infos générales → Accueil → Inscription → Programme → Presse</strong> en premier.</span>
+    <span data-lang-ar style="display:none"><strong>ملاحظة مهمة :</strong> تغطي هذه الوثيقة <strong>8 أقسام</strong> بإجمالي حوالي <strong>49 سؤال</strong>. نوصي بمعالجة الأقسام حسب الأولوية : <strong>المعلومات العامة ← الرئيسية ← التسجيل ← البرنامج ← المركز الإعلامي</strong> أولاً.</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--              SECTION 0 : INFORMATIONS GÉNÉRALES            -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page-section" id="s0">
+  <div class="page-header">
+    <div class="page-number">0</div>
+    <div>
+      <h2>
+        <span data-lang-fr>Informations générales & Identité visuelle</span>
+        <span data-lang-ar style="display:none">المعلومات العامة والهوية البصرية</span>
+      </h2>
+      <span class="page-ar">
+        <span data-lang-fr>المعلومات العامة والهوية البصرية</span>
+        <span data-lang-ar style="display:none">General Information & Visual Identity</span>
+      </span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="context-block">
+      <strong><span data-lang-fr>Contexte :</span><span data-lang-ar style="display:none">السياق :</span></strong>
+      <span data-lang-fr>Ces éléments seront utilisés sur l'ensemble du site (header, footer, emails, etc.). Le site sera la vitrine officielle des Journées Nationales Ouvertes IDMADJ — SMART ACCEL INDUSTRIE 4.0.</span>
+      <span data-lang-ar style="display:none">ستُستخدم هذه العناصر على مستوى الموقع بالكامل (الترويسة، التذييل، البريد الإلكتروني، إلخ). سيكون الموقع الواجهة الرسمية للجلسات الوطنية المفتوحة إدماج — SMART ACCEL INDUSTRIE 4.0.</span>
+    </div>
+
+    <!-- Q0.1 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q0.1</span><span class="q-text"><span data-lang-fr>Fournissez le logo officiel de l'événement IDMADJ / SMART ACCEL INDUSTRIE 4.0</span><span data-lang-ar style="display:none">قدّموا الشعار الرسمي للحدث IDMADJ / SMART ACCEL INDUSTRIE 4.0</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Format haute résolution (PNG transparent + SVG si disponible). Plusieurs versions si existantes (couleur, monochrome, inversé).</span><span data-lang-ar style="display:none">بدقة عالية (PNG شفاف + SVG إن توفر). عدة نسخ إن وجدت (ألوان، أحادي اللون، معكوس).</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-file"><span data-lang-fr>FICHIER</span><span data-lang-ar style="display:none">ملف</span></span>
+      <div class="answer-zone"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q0.2 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q0.2</span><span class="q-text"><span data-lang-fr>Fournissez le logo de l'organisme organisateur (المؤسسة الجزائرية لدعم الشباب وتنمية المقاولاتية)</span><span data-lang-ar style="display:none">قدّموا شعار الهيئة المنظمة (المؤسسة الجزائرية لدعم الشباب وتنمية المقاولاتية)</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Logo haute résolution + logos des organismes de tutelle et de coordination (mentionnés dans le bandeau supérieur du CDC).</span><span data-lang-ar style="display:none">شعار بدقة عالية + شعارات الهيئات الوصية والتنسيقية (المذكورة في الشريط العلوي لدفتر الشروط).</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-file"><span data-lang-fr>FICHIER</span><span data-lang-ar style="display:none">ملف</span></span>
+      <div class="answer-zone"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q0.3 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q0.3</span><span class="q-text"><span data-lang-fr>Confirmez le nom officiel complet de l'événement en arabe et en français</span><span data-lang-ar style="display:none">أكّدوا الاسم الرسمي الكامل للحدث بالعربية والفرنسية</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Mentionné dans le CDC : « الجلسات الوطنية المفتوحة إدماج — SMART ACCEL INDUSTRIE 4.0 ». Confirmez ou fournissez la version finale.</span><span data-lang-ar style="display:none">المذكور في دفتر الشروط : « الجلسات الوطنية المفتوحة إدماج — SMART ACCEL INDUSTRIE 4.0 ». أكّدوا أو قدّموا النسخة النهائية.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Arabe</span><span data-lang-ar style="display:none">العربية</span> : ___<br><br>
+        <span data-lang-fr>Français</span><span data-lang-ar style="display:none">الفرنسية</span> : ___
+      </div>
+    </div>
+
+    <!-- Q0.4 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q0.4</span><span class="q-text"><span data-lang-fr>Confirmez le slogan officiel de l'événement</span><span data-lang-ar style="display:none">أكّدوا الشعار الرسمي للحدث</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Mentionné dans le CDC comme « محفز الإدماج والجودة في الجزائر 2026 ». Confirmez ou fournissez la version finale en AR et FR.</span><span data-lang-ar style="display:none">المذكور في دفتر الشروط كـ « محفز الإدماج والجودة في الجزائر 2026 ». أكّدوا أو قدّموا النسخة النهائية بالعربية والفرنسية.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Arabe</span><span data-lang-ar style="display:none">العربية</span> : ___<br><br>
+        <span data-lang-fr>Français</span><span data-lang-ar style="display:none">الفرنسية</span> : ___
+      </div>
+    </div>
+
+    <!-- Q0.5 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q0.5</span><span class="q-text"><span data-lang-fr>Confirmez les dates et lieux exacts de l'événement</span><span data-lang-ar style="display:none">أكّدوا التواريخ والأماكن الدقيقة للحدث</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Mentionné dans le CDC : Événement principal le 30 juillet 2026, Hôtel Ferdi Lilly. Période globale : 25 juin – 24 septembre 2026. Séminaires régionaux à Ouargla, Annaba, Oran.</span><span data-lang-ar style="display:none">المذكور في دفتر الشروط : الحدث الرئيسي 30 جويلية 2026، فندق فاردي ليلي. الفترة الإجمالية : 25 جوان – 24 سبتمبر 2026. ندوات جهوية في ورقلة، عنابة، وهران.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Date événement principal</span><span data-lang-ar style="display:none">تاريخ الحدث الرئيسي</span> : ___<br>
+        <span data-lang-fr>Lieu principal (hôtel / adresse)</span><span data-lang-ar style="display:none">المكان الرئيسي (فندق / عنوان)</span> : ___<br>
+        <span data-lang-fr>Période globale (début — fin)</span><span data-lang-ar style="display:none">الفترة الإجمالية (بداية — نهاية)</span> : ___<br>
+        <span data-lang-fr>Séminaire Ouargla — Date & Lieu</span><span data-lang-ar style="display:none">ندوة ورقلة — التاريخ والمكان</span> : ___<br>
+        <span data-lang-fr>Séminaire Annaba — Date & Lieu</span><span data-lang-ar style="display:none">ندوة عنابة — التاريخ والمكان</span> : ___<br>
+        <span data-lang-fr>Séminaire Oran — Date & Lieu</span><span data-lang-ar style="display:none">ندوة وهران — التاريخ والمكان</span> : ___
+      </div>
+    </div>
+
+    <!-- Q0.6 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q0.6</span><span class="q-text"><span data-lang-fr>Fournissez la charte graphique de l'événement si elle existe</span><span data-lang-ar style="display:none">قدّموا الميثاق البصري للحدث إن وُجد</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Guide de style, codes couleurs officiels, typographies, règles d'usage du logo. Sinon, le développeur proposera une identité visuelle.</span><span data-lang-ar style="display:none">دليل الأسلوب، رموز الألوان الرسمية، الخطوط، قواعد استخدام الشعار. وإلا سيقترح المطور هوية بصرية.</span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span><span class="tag tag-file"><span data-lang-fr>FICHIER</span><span data-lang-ar style="display:none">ملف</span></span>
+      <div class="answer-zone"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q0.7 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q0.7</span><span class="q-text"><span data-lang-fr>Confirmez les chiffres clés à afficher sur le site (compteurs animés)</span><span data-lang-ar style="display:none">أكّدوا الأرقام الرئيسية للعرض على الموقع (عدادات متحركة)</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Mentionnés dans le CDC : nombre de participants, ateliers, séminaires régionaux, entreprises ciblées. Ces chiffres apparaîtront dans le Hero avec le compte à rebours.</span><span data-lang-ar style="display:none">المذكورة في دفتر الشروط : عدد المشاركين، الورشات، الندوات الجهوية، المؤسسات المستهدفة. ستظهر هذه الأرقام في قسم Hero مع العد التنازلي.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Nombre de participants attendus</span><span data-lang-ar style="display:none">عدد المشاركين المتوقعين</span> : ___<br>
+        <span data-lang-fr>Nombre d'ateliers / ورشات</span><span data-lang-ar style="display:none">عدد الورشات</span> : ___<br>
+        <span data-lang-fr>Nombre de séminaires régionaux</span><span data-lang-ar style="display:none">عدد الندوات الجهوية</span> : ___<br>
+        <span data-lang-fr>Nombre d'entreprises ciblées</span><span data-lang-ar style="display:none">عدد المؤسسات المستهدفة</span> : ___<br>
+        <span data-lang-fr>Autres chiffres à afficher</span><span data-lang-ar style="display:none">أرقام أخرى للعرض</span> : ___
+      </div>
+    </div>
+
+    <!-- Q0.8 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q0.8</span><span class="q-text"><span data-lang-fr>Fournissez les liens des réseaux sociaux officiels</span><span data-lang-ar style="display:none">قدّموا روابط شبكات التواصل الاجتماعي الرسمية</span></span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone">
+        Facebook : ___<br>
+        LinkedIn : ___<br>
+        Twitter/X : ___<br>
+        Instagram : ___<br>
+        YouTube : ___<br>
+        <span data-lang-fr>Autre</span><span data-lang-ar style="display:none">أخرى</span> : ___
+      </div>
+    </div>
+
+    <!-- Q0.9 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q0.9</span><span class="q-text"><span data-lang-fr>Fournissez les coordonnées de contact officielles de l'organisme</span><span data-lang-ar style="display:none">قدّموا بيانات الاتصال الرسمية للمؤسسة</span></span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Adresse postale complète</span><span data-lang-ar style="display:none">العنوان البريدي الكامل</span> : ___<br>
+        <span data-lang-fr>Téléphone principal</span><span data-lang-ar style="display:none">الهاتف الرئيسي</span> : ___<br>
+        <span data-lang-fr>Email principal</span><span data-lang-ar style="display:none">البريد الرئيسي</span> : ___<br>
+        <span data-lang-fr>Email inscriptions</span><span data-lang-ar style="display:none">بريد التسجيل</span> : ___
+      </div>
+    </div>
+
+    <!-- Q0.10 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q0.10</span><span class="q-text"><span data-lang-fr>Fournissez les logos des sponsors et partenaires pour le bandeau défilant</span><span data-lang-ar style="display:none">قدّموا شعارات الرعاة والشركاء للشريط المتحرك</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Le CDC prévoit un bandeau défilant avec les logos des sponsors et partenaires sur la page d'accueil. Fournissez chaque logo + nom + lien vers le site web.</span><span data-lang-ar style="display:none">يتضمن دفتر الشروط شريطاً متحركاً بشعارات الرعاة والشركاء في الصفحة الرئيسية. قدّموا كل شعار + الاسم + رابط الموقع.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-file"><span data-lang-fr>FICHIER</span><span data-lang-ar style="display:none">ملف</span></span>
+      <div class="answer-zone large">
+        <span data-lang-fr>Sponsor/Partenaire 1</span><span data-lang-ar style="display:none">الراعي/الشريك 1</span> : <span data-lang-fr>Nom</span><span data-lang-ar style="display:none">الاسم</span> ___ | <span data-lang-fr>Site web</span><span data-lang-ar style="display:none">الموقع</span> ___ | Logo ☐<br><br>
+        <span data-lang-fr>Sponsor/Partenaire 2</span><span data-lang-ar style="display:none">الراعي/الشريك 2</span> : <span data-lang-fr>Nom</span><span data-lang-ar style="display:none">الاسم</span> ___ | <span data-lang-fr>Site web</span><span data-lang-ar style="display:none">الموقع</span> ___ | Logo ☐<br><br>
+        (<span data-lang-fr>etc.</span><span data-lang-ar style="display:none">إلخ.</span>)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--              SECTION 1 : ACCUEIL / HERO                    -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page-section page-break" id="s1">
+  <div class="page-header">
+    <div class="page-number">1</div>
+    <div>
+      <h2><span data-lang-fr>Section Accueil — Hero & Navigation (الرئيسية)</span><span data-lang-ar style="display:none">قسم الرئيسية — العرض البصري والتنقل</span></h2>
+      <span class="page-ar"><span data-lang-fr>الواجهة التسويقية الرئيسية</span><span data-lang-ar style="display:none">Vitrine marketing principale</span></span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="context-block">
+      <strong><span data-lang-fr>Contexte (CDC) :</span><span data-lang-ar style="display:none">السياق (دفتر الشروط) :</span></strong>
+      <span data-lang-fr>Le Hero Section comprend : nom de l'événement, slogan, date (30 juillet 2026), lieu (Hôtel Ferdi Lilly), période de l'événement (25 juin — 24 septembre 2026), un compte à rebours, les chiffres clés animés, et un bandeau défilant de logos sponsors/partenaires. Le bandeau supérieur contient le logo + nom de l'organisateur + organismes de tutelle + liens sections + bouton « سجل الآن ».</span>
+      <span data-lang-ar style="display:none">يتضمن قسم Hero : اسم الحدث، الشعار، التاريخ (30 جويلية 2026)، المكان (فندق فاردي ليلي)، فترة الحدث (25 جوان — 24 سبتمبر 2026)، عد تنازلي، الأرقام الرئيسية المتحركة، وشريط متحرك لشعارات الرعاة/الشركاء. الشريط العلوي يحتوي الشعار + اسم المنظم + الهيئات الوصية + روابط الأقسام + زر « سجل الآن ».</span>
+    </div>
+
+    <!-- Q1.1 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q1.1</span><span class="q-text"><span data-lang-fr>Fournissez le texte principal du Hero (titre d'accroche)</span><span data-lang-ar style="display:none">قدّموا النص الرئيسي للـ Hero (العنوان الجذّاب)</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Le texte grand format qui apparaît en premier sur le site. Exemple : « الجلسات الوطنية المفتوحة إدماج — SMART ACCEL INDUSTRIE 4.0 »</span><span data-lang-ar style="display:none">النص الكبير الذي يظهر أولاً في الموقع. مثال : « الجلسات الوطنية المفتوحة إدماج — SMART ACCEL INDUSTRIE 4.0 »</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Arabe</span><span data-lang-ar style="display:none">العربية</span> : ___<br><br>
+        <span data-lang-fr>Français</span><span data-lang-ar style="display:none">الفرنسية</span> : ___
+      </div>
+    </div>
+
+    <!-- Q1.2 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q1.2</span><span class="q-text"><span data-lang-fr>Fournissez un sous-titre ou une phrase d'accroche pour le Hero</span><span data-lang-ar style="display:none">قدّموا عنواناً فرعياً أو جملة جاذبة للـ Hero</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Phrase courte sous le titre principal. Exemple : « محفز الإدماج والجودة في الجزائر 2026 »</span><span data-lang-ar style="display:none">جملة قصيرة تحت العنوان الرئيسي. مثال : « محفز الإدماج والجودة في الجزائر 2026 »</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Arabe</span><span data-lang-ar style="display:none">العربية</span> : ___<br><br>
+        <span data-lang-fr>Français</span><span data-lang-ar style="display:none">الفرنسية</span> : ___
+      </div>
+    </div>
+
+    <!-- Q1.3 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q1.3</span><span class="q-text"><span data-lang-fr>Fournissez une image de fond pour le Hero Section</span><span data-lang-ar style="display:none">قدّموا صورة خلفية لقسم Hero</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Image panoramique haute résolution (min 1920×1080). Photo d'événement précédent, industrielle, ou image du lieu.</span><span data-lang-ar style="display:none">صورة بانورامية بدقة عالية (كحد أدنى 1920×1080). صورة حدث سابق، صناعية، أو صورة المكان.</span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span><span class="tag tag-file"><span data-lang-fr>FICHIER</span><span data-lang-ar style="display:none">ملف</span></span>
+      <div class="answer-zone"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q1.4 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q1.4</span><span class="q-text"><span data-lang-fr>Quel texte pour le bouton CTA principal (appel à l'action) ?</span><span data-lang-ar style="display:none">ما نص زر CTA الرئيسي (الدعوة للتسجيل) ؟</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Mentionné dans le CDC : « سجل الآن / Inscrivez-vous maintenant ». Confirmez ou proposez un autre texte.</span><span data-lang-ar style="display:none">المذكور في دفتر الشروط : « سجل الآن ». أكّدوا أو اقترحوا نصاً آخر.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone small">
+        <span data-lang-fr>Arabe</span><span data-lang-ar style="display:none">العربية</span> : ___<br>
+        <span data-lang-fr>Français</span><span data-lang-ar style="display:none">الفرنسية</span> : ___
+      </div>
+    </div>
+
+    <!-- Q1.5 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q1.5</span><span class="q-text"><span data-lang-fr>Confirmez les noms des sections pour le menu de navigation</span><span data-lang-ar style="display:none">أكّدوا أسماء الأقسام لقائمة التنقل</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Le CDC prévoit : Accueil, À propos, Programme, Centre de presse, Inscription. Confirmez ou proposez d'autres noms.</span><span data-lang-ar style="display:none">يتضمن دفتر الشروط : الرئيسية، عن الجلسات، البرنامج، المركز الإعلامي، التسجيل. أكّدوا أو اقترحوا أسماءً أخرى.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Section 1</span><span data-lang-ar style="display:none">القسم 1</span> : AR ___ / FR ___<br>
+        <span data-lang-fr>Section 2</span><span data-lang-ar style="display:none">القسم 2</span> : AR ___ / FR ___<br>
+        <span data-lang-fr>Section 3</span><span data-lang-ar style="display:none">القسم 3</span> : AR ___ / FR ___<br>
+        <span data-lang-fr>Section 4</span><span data-lang-ar style="display:none">القسم 4</span> : AR ___ / FR ___<br>
+        <span data-lang-fr>Section 5</span><span data-lang-ar style="display:none">القسم 5</span> : AR ___ / FR ___
+      </div>
+    </div>
+
+    <!-- Q1.6 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q1.6</span><span class="q-text"><span data-lang-fr>Quel texte doit apparaître dans le footer du site (pied de page) ?</span><span data-lang-ar style="display:none">ما النص الذي يجب أن يظهر في تذييل الموقع ؟</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Copyright, mentions, liens rapides. Ex : « © 2026 IDMADJ.DZ — Tous droits réservés ».</span><span data-lang-ar style="display:none">حقوق النشر، الإشارات، روابط سريعة. مثال : « © 2026 IDMADJ.DZ — جميع الحقوق محفوظة ».</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q1.7 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q1.7</span><span class="q-text"><span data-lang-fr>Souhaitez-vous un message de bienvenue ou une citation officielle dans le hero ?</span><span data-lang-ar style="display:none">هل ترغبون في رسالة ترحيب أو اقتباس رسمي في قسم Hero ؟</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Ex : mot du président de l'organisme, citation officielle, etc.</span><span data-lang-ar style="display:none">مثال : كلمة رئيس المؤسسة، اقتباس رسمي، إلخ.</span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span>
+      <div class="answer-zone"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q1.8 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q1.8</span><span class="q-text"><span data-lang-fr>Y a-t-il une vidéo promotionnelle de l'événement à intégrer ?</span><span data-lang-ar style="display:none">هل يوجد فيديو ترويجي للحدث لدمجه ؟</span></span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span><span class="tag tag-file"><span data-lang-fr>FICHIER</span><span data-lang-ar style="display:none">ملف</span></span>
+      <div class="answer-zone small"><span data-lang-fr>Lien YouTube / fichier</span><span data-lang-ar style="display:none">رابط YouTube / ملف</span> : ___</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--              SECTION 2 : À PROPOS / عن الجلسات           -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page-section page-break" id="s2">
+  <div class="page-header">
+    <div class="page-number">2</div>
+    <div>
+      <h2><span data-lang-fr>Section À propos — عن الجلسات</span><span data-lang-ar style="display:none">قسم عن الجلسات</span></h2>
+      <span class="page-ar"><span data-lang-fr>نبذة عن المبادرة والإدماج الصناعي</span><span data-lang-ar style="display:none">Présentation de l'initiative et de l'intégration industrielle</span></span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="context-block">
+      <strong><span data-lang-fr>Contexte (CDC) :</span><span data-lang-ar style="display:none">السياق (دفتر الشروط) :</span></strong>
+      <span data-lang-fr>Section de présentation succincte : nبذة عن المبادرة، l'intégration industrielle, la révolution industrielle 4.0, et l'impact attendu. C'est un résumé (pas une page complète).</span>
+      <span data-lang-ar style="display:none">قسم تقديمي مختصر : نبذة عن المبادرة، الإدماج الصناعي، الثورة الصناعية الرابعة، والأثر المتوقع. إنه ملخص (وليس صفحة كاملة).</span>
+    </div>
+
+    <!-- Q2.1 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q2.1</span><span class="q-text"><span data-lang-fr>Rédigez une présentation courte de l'initiative IDMADJ</span><span data-lang-ar style="display:none">اكتبوا تقديماً مختصراً لمبادرة إدماج</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Paragraphe de 100-200 mots couvrant : qu'est-ce que IDMADJ ? Le lien avec l'intégration industrielle et la sous-traitance. Le lien avec l'Industrie 4.0 (IA, IoT, automatisation).</span><span data-lang-ar style="display:none">فقرة من 100-200 كلمة تغطي : ما هي إدماج ؟ العلاقة بالإدماج الصناعي والمناولة. العلاقة بالصناعة 4.0 (الذكاء الاصطناعي، إنترنت الأشياء، الأتمتة).</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large"><span data-lang-fr>Arabe</span><span data-lang-ar style="display:none">العربية</span> : ___<br><br><span data-lang-fr>Français</span><span data-lang-ar style="display:none">الفرنسية</span> : ___</div>
+    </div>
+
+    <!-- Q2.2 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q2.2</span><span class="q-text"><span data-lang-fr>Listez les objectifs principaux de l'événement (4 à 6 objectifs)</span><span data-lang-ar style="display:none">اذكروا الأهداف الرئيسية للحدث (4 إلى 6 أهداف)</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Chaque objectif = 1 phrase claire. Mentionnés dans le CDC : التعريف بالحدث, أهدافه, وبرنامجه.</span><span data-lang-ar style="display:none">كل هدف = جملة واضحة واحدة. المذكور في دفتر الشروط : التعريف بالحدث، أهدافه، وبرنامجه.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large">1. ___<br>2. ___<br>3. ___<br>4. ___<br>5. ___<br>6. ___</div>
+    </div>
+
+    <!-- Q2.3 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q2.3</span><span class="q-text"><span data-lang-fr>Décrivez l'impact attendu de l'événement</span><span data-lang-ar style="display:none">صِفوا الأثر المتوقع للحدث</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>3-5 impacts concrets (partenariats, emplois, contrats, transfert technologique, etc.).</span><span data-lang-ar style="display:none">3-5 آثار ملموسة (شراكات، وظائف، عقود، نقل تكنولوجي، إلخ).</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q2.4 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q2.4</span><span class="q-text"><span data-lang-fr>Présentez brièvement l'organisme organisateur</span><span data-lang-ar style="display:none">قدّموا بإيجاز الهيئة المنظمة</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>50-100 mots sur la المؤسسة الجزائرية لدعم الشباب وتنمية المقاولاتية : mission, historique, rôle.</span><span data-lang-ar style="display:none">50-100 كلمة عن المؤسسة الجزائرية لدعم الشباب وتنمية المقاولاتية : المهمة، التاريخ، الدور.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q2.5 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q2.5</span><span class="q-text"><span data-lang-fr>Fournissez des photos illustratives pour cette section</span><span data-lang-ar style="display:none">قدّموا صوراً توضيحية لهذا القسم</span></span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span><span class="tag tag-file"><span data-lang-fr>FICHIER</span><span data-lang-ar style="display:none">ملف</span></span>
+      <div class="answer-zone small"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q2.6 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q2.6</span><span class="q-text"><span data-lang-fr>Y a-t-il un « mot du président » ou un message officiel à afficher ?</span><span data-lang-ar style="display:none">هل يوجد « كلمة الرئيس » أو رسالة رسمية لعرضها ؟</span></span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span><span class="tag tag-file"><span data-lang-fr>FICHIER</span><span data-lang-ar style="display:none">ملف</span></span>
+      <div class="answer-zone large"><span data-lang-fr>Texte + photo (si disponible)</span><span data-lang-ar style="display:none">النص + صورة (إن توفرت)</span> : ___</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--              SECTION 3 : PROGRAMME / البرنامج العام       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page-section page-break" id="s3">
+  <div class="page-header">
+    <div class="page-number">3</div>
+    <div>
+      <h2><span data-lang-fr>Section Programme — البرنامج العام</span><span data-lang-ar style="display:none">قسم البرنامج العام</span></h2>
+      <span class="page-ar"><span data-lang-fr>عرض في شكل Timeline مبسط</span><span data-lang-ar style="display:none">Affichage en Timeline simplifié</span></span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="context-block">
+      <strong><span data-lang-fr>Contexte (CDC) :</span><span data-lang-ar style="display:none">السياق (دفتر الشروط) :</span></strong>
+      <span data-lang-fr>Affichage Timeline simplifié du programme : session d'ouverture (25 juin), séminaires régionaux (Ouargla, Annaba, Oran), hackathon, et clôture (24 septembre). Avec un bouton de téléchargement du programme complet en PDF.</span>
+      <span data-lang-ar style="display:none">عرض Timeline مبسط للبرنامج : جلسة الافتتاح (25 جوان)، الندوات الجهوية (ورقلة، عنابة، وهران)، الهاكاثون، والاختتام (24 سبتمبر). مع زر تحميل البرنامج الكامل بصيغة PDF.</span>
+    </div>
+
+    <!-- Q3.1 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q3.1</span><span class="q-text"><span data-lang-fr>Fournissez le programme synthétique de la journée d'ouverture</span><span data-lang-ar style="display:none">قدّموا البرنامج المختصر ليوم الافتتاح</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Pour la Timeline : date, titre de chaque session, horaires approximatifs. Le CDC mentionne 3 sessions principales le jour de l'ouverture.</span><span data-lang-ar style="display:none">للـ Timeline : التاريخ، عنوان كل جلسة، المواقيت التقريبية. يذكر دفتر الشروط 3 جلسات رئيسية يوم الافتتاح.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large"><span data-lang-fr>Horaire | Activité | Intervenant</span><span data-lang-ar style="display:none">التوقيت | النشاط | المتدخل</span> :<br>___ : ___ (___)<br>___ : ___ (___)<br>___ : ___ (___)<br>___ : ___ (___)</div>
+    </div>
+
+    <!-- Q3.2 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q3.2</span><span class="q-text"><span data-lang-fr>Fournissez les dates et thèmes des séminaires régionaux</span><span data-lang-ar style="display:none">قدّموا تواريخ وموضوعات الندوات الجهوية</span></span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large">
+        <span data-lang-fr>Ouargla</span><span data-lang-ar style="display:none">ورقلة</span> — <span data-lang-fr>Date</span><span data-lang-ar style="display:none">التاريخ</span> : ___ | <span data-lang-fr>Thème</span><span data-lang-ar style="display:none">الموضوع</span> : ___<br><br>
+        <span data-lang-fr>Annaba</span><span data-lang-ar style="display:none">عنابة</span> — <span data-lang-fr>Date</span><span data-lang-ar style="display:none">التاريخ</span> : ___ | <span data-lang-fr>Thème</span><span data-lang-ar style="display:none">الموضوع</span> : ___<br><br>
+        <span data-lang-fr>Oran</span><span data-lang-ar style="display:none">وهران</span> — <span data-lang-fr>Date</span><span data-lang-ar style="display:none">التاريخ</span> : ___ | <span data-lang-fr>Thème</span><span data-lang-ar style="display:none">الموضوع</span> : ___
+      </div>
+    </div>
+
+    <!-- Q3.3 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q3.3</span><span class="q-text"><span data-lang-fr>Fournissez les informations sur le Hackathon (dates, thème)</span><span data-lang-ar style="display:none">قدّموا معلومات الهاكاثون (التواريخ، الموضوع)</span></span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Dates</span><span data-lang-ar style="display:none">التواريخ</span> : ___<br>
+        <span data-lang-fr>Thème / Description courte</span><span data-lang-ar style="display:none">الموضوع / وصف مختصر</span> : ___
+      </div>
+    </div>
+
+    <!-- Q3.4 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q3.4</span><span class="q-text"><span data-lang-fr>Fournissez le programme de la cérémonie de clôture (24 septembre 2026)</span><span data-lang-ar style="display:none">قدّموا برنامج حفل الاختتام (24 سبتمبر 2026)</span></span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q3.5 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q3.5</span><span class="q-text"><span data-lang-fr>Y a-t-il un programme PDF complet à proposer en téléchargement ?</span><span data-lang-ar style="display:none">هل يوجد برنامج PDF كامل للتحميل ؟</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr">Le CDC prévoit un bouton « تحميل البرنامج كاملاً بصيغة PDF » dans la section Programme.</span><span data-lang-ar style="display:none">يتضمن دفتر الشروط زر « تحميل البرنامج كاملاً بصيغة PDF » في قسم البرنامج.</span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span><span class="tag tag-file"><span data-lang-fr>FICHIER</span><span data-lang-ar style="display:none">ملف</span></span>
+      <div class="answer-zone small"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q3.6 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q3.6</span><span class="q-text"><span data-lang-fr>Fournissez un texte introductif pour la section Programme</span><span data-lang-ar style="display:none">قدّموا نصاً تمهيدياً لقسم البرنامج</span></span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--              SECTION 4 : CENTRE DE PRESSE                  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page-section page-break" id="s4">
+  <div class="page-header">
+    <div class="page-number">4</div>
+    <div>
+      <h2><span data-lang-fr>Section Centre de presse — المركز الإعلامي</span><span data-lang-ar style="display:none">قسم المركز الإعلامي</span></h2>
+      <span class="page-ar"><span data-lang-fr>أخبار، بيانات صحفية، صور وفيديوهات</span><span data-lang-ar style="display:none">Actualités, communiqués, photos et vidéos</span></span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="context-block">
+      <strong><span data-lang-fr>Contexte (CDC) :</span><span data-lang-ar style="display:none">السياق (دفتر الشروط) :</span></strong>
+      <span data-lang-fr>Section simple affichant les actualités, communiqués de presse, album de photos et vidéos de l'événement (liens YouTube ou vidéos légères intégrées). Contenu géré via la lوحة التحكم.</span>
+      <span data-lang-ar style="display:none">قسم بسيط يعرض الأخبار، البيانات الصحفية، ألبوم الصور وفيديوهات الحدث (روابط YouTube أو فيديوهات خفيفة مدمجة). المحتوى يُدار عبر لوحة التحكم.</span>
+    </div>
+
+    <!-- Q4.1 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q4.1</span><span class="q-text"><span data-lang-fr>Fournissez les premiers communiqués de presse ou actualités à publier</span><span data-lang-ar style="display:none">قدّموا أولى البيانات الصحفية أو الأخبار للنشر</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Au moins 1-2 articles/communiqués pour le lancement du site. Les suivants seront ajoutés via la لوحة التحكم.</span><span data-lang-ar style="display:none">على الأقل 1-2 مقال/بيان لإطلاق الموقع. التالية ستُضاف عبر لوحة التحكم.</span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q4.2 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q4.2</span><span class="q-text"><span data-lang-fr>Fournissez les photos pour la galerie (معرض الوسائط)</span><span data-lang-ar style="display:none">قدّموا الصور لمعرض الوسائط</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Photos d'événements précédents, de préparation, industrielles. Minimum 5 photos haute résolution pour le lancement.</span><span data-lang-ar style="display:none">صور أحداث سابقة، تحضيرية، صناعية. 5 صور بدقة عالية كحد أدنى للإطلاق.</span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span><span class="tag tag-file"><span data-lang-fr>FICHIER</span><span data-lang-ar style="display:none">ملف</span></span>
+      <div class="answer-zone small"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q4.3 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q4.3</span><span class="q-text"><span data-lang-fr>Fournissez les liens de vidéos à intégrer</span><span data-lang-ar style="display:none">قدّموا روابط الفيديوهات لدمجها</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Le CDC prévoit des vidéos intégrées (YouTube ou légères). Fournissez les liens existants.</span><span data-lang-ar style="display:none">يتضمن دفتر الشروط فيديوهات مدمجة (YouTube أو خفيفة). قدّموا الروابط الموجودة.</span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span>
+      <div class="answer-zone small"><span data-lang-fr>Lien 1</span><span data-lang-ar style="display:none">رابط 1</span> : ___<br><span data-lang-fr>Lien 2</span><span data-lang-ar style="display:none">رابط 2</span> : ___</div>
+    </div>
+
+    <!-- Q4.4 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q4.4</span><span class="q-text"><span data-lang-fr>Rédigez un texte introductif pour la section Presse</span><span data-lang-ar style="display:none">اكتبوا نصاً تمهيدياً لقسم المركز الإعلامي</span></span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q4.5 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q4.5</span><span class="q-text"><span data-lang-fr>Y a-t-il un dossier de presse (Press Kit) à proposer en téléchargement ?</span><span data-lang-ar style="display:none">هل يوجد ملف صحفي (Press Kit) للتحميل ؟</span></span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span><span class="tag tag-file"><span data-lang-fr>FICHIER</span><span data-lang-ar style="display:none">ملف</span></span>
+      <div class="answer-zone small"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--              SECTION 5 : FORMULAIRE D'INSCRIPTION          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page-section page-break" id="s5">
+  <div class="page-header" style="background: linear-gradient(135deg, #065f46, #064e3b);">
+    <div class="page-number" style="background: var(--success);">5</div>
+    <div>
+      <h2><span data-lang-fr>Formulaire d'inscription unifié — استمارة التسجيل الموحدة</span><span data-lang-ar style="display:none">استمارة التسجيل الموحدة</span></h2>
+      <span class="page-ar"><span data-lang-fr>نموذج إلكتروني واحد يُكيَّف يدوياً</span><span data-lang-ar style="display:none">Un seul formulaire, adapté manuellement</span></span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="context-block">
+      <strong><span data-lang-fr>Contexte (CDC) :</span><span data-lang-ar style="display:none">السياق (دفتر الشروط) :</span></strong>
+      <span data-lang-fr>Le CDC prévoit <strong>un seul formulaire d'inscription unifié</strong> (pas de formulaires multiples). Les champs sont définis dans le CDC. Les données sont stockées en base, un email de confirmation est envoyé, et un bouton « Exporter en Excel » est disponible dans le Back Office. Le formulaire inclut également les centres d'intérêt du participant (séminaires, pitch box, B2B, hackathon, sponsoring, etc.).</span>
+      <span data-lang-ar style="display:none">يتضمن دفتر الشروط <strong>استمارة تسجيل واحدة موحدة</strong> (بدون استمارات متعددة). الحقول محددة في دفتر الشروط. تُخزّن البيانات في قاعدة البيانات، تُرسل رسالة تأكيد آلية، وزر « تصدير إلى Excel » متوفر في لوحة التحكم. تتضمن الاستمارة أيضاً مجالات اهتمام المشارك (الندوات، Pitch Box، B2B، هاكاثون، رعاية، إلخ).</span>
+    </div>
+
+    <!-- Q5.1 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q5.1</span><span class="q-text"><span data-lang-fr>Confirmez / modifiez la liste des champs du formulaire d'inscription</span><span data-lang-ar style="display:none">أكّدوا / عدّلوا قائمة حقول استمارة التسجيل</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Le CDC définit les champs suivants. Cochez ceux à conserver, barrez ceux à supprimer, et ajoutez ceux manquants.</span><span data-lang-ar style="display:none">يحدد دفتر الشروط الحقول التالية. ضعوا علامة على الحقول المطلوب الإبقاء عليها، اشطبوا الحقول المطلوب حذفها، وأضيفوا الناقصة.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone large">
+        ☐ <span data-lang-fr>Nom de l'entreprise</span><span data-lang-ar style="display:none">اسم المؤسسة</span><br>
+        ☐ <span data-lang-fr>Forme juridique</span><span data-lang-ar style="display:none">الشكل القانوني</span><br>
+        ☐ <span data-lang-fr>N° Registre de commerce</span><span data-lang-ar style="display:none">رقم السجل التجاري</span><br>
+        ☐ <span data-lang-fr>N° Identification fiscale</span><span data-lang-ar style="display:none">رقم التعريف الجبائي</span><br>
+        ☐ <span data-lang-fr>Secteur économique</span><span data-lang-ar style="display:none">القطاع الاقتصادي</span><br>
+        ☐ <span data-lang-fr>Activité principale</span><span data-lang-ar style="display:none">النشاط الرئيسي</span><br>
+        ☐ <span data-lang-fr>Wilaya</span><span data-lang-ar style="display:none">الولاية</span><br>
+        ☐ <span data-lang-fr>Adresse</span><span data-lang-ar style="display:none">العنوان</span><br>
+        ☐ <span data-lang-fr>Email</span><span data-lang-ar style="display:none">البريد الإلكتروني</span><br>
+        ☐ <span data-lang-fr>Téléphone</span><span data-lang-ar style="display:none">رقم الهاتف</span><br>
+        ☐ <span data-lang-fr>Site web</span><span data-lang-ar style="display:none">الموقع الإلكتروني</span><br>
+        ☐ <span data-lang-fr>Nom du responsable / représentant</span><span data-lang-ar style="display:none">اسم المسؤول أو الممثل</span><br>
+        ☐ <span data-lang-fr>Poste</span><span data-lang-ar style="display:none">المنصب</span><br>
+        ☐ <span data-lang-fr>Nombre d'employés</span><span data-lang-ar style="display:none">عدد العمال</span><br>
+        ☐ <span data-lang-fr>Taille (micro, petite, moyenne, grande, startup)</span><span data-lang-ar style="display:none">الحجم (مصغرة، صغيرة، متوسطة، كبيرة، ناشئة)</span><br>
+        ☐ <span data-lang-fr>Domaine (productrice, sous-traitance, services)</span><span data-lang-ar style="display:none">المجال (منتجة، مناولة، خدمات)</span><br>
+        ☐ <span data-lang-fr>Photo de profil du participant</span><span data-lang-ar style="display:none">الصورة الشخصية للمسجل</span><br>
+        ☐ <span data-lang-fr>Logo de l'entreprise</span><span data-lang-ar style="display:none">شعار المؤسسة</span><br>
+        ☐ <span data-lang-fr>Fichier profil PDF de l'entreprise</span><span data-lang-ar style="display:none">ملف تعريفي PDF للمؤسسة</span><br>
+        <br><span data-lang-fr>Champs à ajouter</span><span data-lang-ar style="display:none">حقول للإضافة</span> : ___
+      </div>
+    </div>
+
+    <!-- Q5.2 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q5.2</span><span class="q-text"><span data-lang-fr>Confirmez la liste des centres d'intérêt (مجالات الاهتمام) du formulaire</span><span data-lang-ar style="display:none">أكّدوا قائمة مجالات الاهتمام في الاستمارة</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Le CDC prévoit les options suivantes (cases à cocher dans le formulaire). Confirmez, modifiez ou ajoutez.</span><span data-lang-ar style="display:none">يتضمن دفتر الشروط الخيارات التالية (مربعات اختيار في الاستمارة). أكّدوا، عدّلوا أو أضيفوا.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone large">
+        ☐ <span data-lang-fr>Bénéficier de formations dans les séminaires régionaux</span><span data-lang-ar style="display:none">الاستفادة من التكوين ضمن الندوات الجهوية</span><br>
+        ☐ <span data-lang-fr>Pitcher son projet (Pitch Box 1 min)</span><span data-lang-ar style="display:none">تسويق المشروع الخاص (Pitch Box 1 min)</span><br>
+        ☐ <span data-lang-fr>Recruter des compétences (sous-traitance & qualité)</span><span data-lang-ar style="display:none">توظيف خبرات ومهارات في مجال المناولة والجودة</span><br>
+        ☐ <span data-lang-fr>Opportunité de partenariat B2B (clôture)</span><span data-lang-ar style="display:none">فرصة شراكة ومناولة B2B (حفل الاختتام)</span><br>
+        ☐ <span data-lang-fr>Participer au Hackathon</span><span data-lang-ar style="display:none">المشاركة في الهاكاثون</span><br>
+        ☐ <span data-lang-fr>Sponsoring & financement de l'événement</span><span data-lang-ar style="display:none">رعاية وتمويل الحدث</span><br>
+        ☐ <span data-lang-fr>Couverture médiatique de l'événement</span><span data-lang-ar style="display:none">تغطية الحدث إعلامياً</span><br>
+        <br><span data-lang-fr>Centres d'intérêt à ajouter</span><span data-lang-ar style="display:none">مجالات اهتمام للإضافة</span> : ___
+      </div>
+    </div>
+
+    <!-- Q5.3 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q5.3</span><span class="q-text"><span data-lang-fr>Confirmez la liste des secteurs économiques proposés</span><span data-lang-ar style="display:none">أكّدوا قائمة القطاعات الاقتصادية المقترحة</span></span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone large">1. ___<br>2. ___<br>3. ___<br>4. ___<br>5. ___<br>6. ___<br>7. ___<br>8. ___</div>
+    </div>
+
+    <!-- Q5.4 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q5.4</span><span class="q-text"><span data-lang-fr>Fournissez les conditions de participation à accepter</span><span data-lang-ar style="display:none">قدّموا شروط المشاركة للقبول</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Le CDC mentionne : « قبول شروط المشاركة وسياسة حماية البيانات ». Fournissez le texte complet de ces conditions.</span><span data-lang-ar style="display:none">يذكر دفتر الشروط : « قبول شروط المشاركة وسياسة حماية البيانات ». قدّموا النص الكامل لهذه الشروط.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+
+    <!-- Q5.5 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q5.5</span><span class="q-text"><span data-lang-fr>Quel message de confirmation après inscription réussie ?</span><span data-lang-ar style="display:none">ما رسالة التأكيد بعد تسجيل ناجح ؟</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Le CDC prévoit : « تم استلام طلبكم بنجاح / Votre demande a été reçue avec succès ». Confirmez ou modifiez.</span><span data-lang-ar style="display:none">يتضمن دفتر الشروط : « تم استلام طلبكم بنجاح ». أكّدوا أو عدّلوا.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Message sur le site</span><span data-lang-ar style="display:none">الرسالة على الموقع</span> : ___<br><br>
+        <span data-lang-fr>Contenu de l'email de confirmation</span><span data-lang-ar style="display:none">محتوى رسالة التأكيد بالبريد</span> : ___
+      </div>
+    </div>
+
+    <!-- Q5.6 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q5.6</span><span class="q-text"><span data-lang-fr>Rédigez un texte introductif pour la section Inscription</span><span data-lang-ar style="display:none">اكتبوا نصاً تمهيدياً لقسم التسجيل</span></span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--              SECTION 6 : PAGES LÉGALES                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page-section page-break" id="s6">
+  <div class="page-header" style="background: linear-gradient(135deg, #4a1942, #2d1b69);">
+    <div class="page-number" style="background: var(--secondary);">6</div>
+    <div>
+      <h2><span data-lang-fr>Rédactions & Textes légaux</span><span data-lang-ar style="display:none">النصوص والصفحات القانونية</span></h2>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="context-block">
+      <strong><span data-lang-fr>Contexte :</span><span data-lang-ar style="display:none">السياق :</span></strong>
+      <span data-lang-fr>Textes nécessaires pour la conformité légale du site : politique de confidentialité, conditions d'utilisation, et conditions de participation.</span>
+      <span data-lang-ar style="display:none">النصوص اللازمة للامتثال القانوني للموقع : سياسة الخصوصية، شروط الاستخدام، وشروط المشاركة.</span>
+    </div>
+
+    <!-- Q6.1 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q6.1</span><span class="q-text"><span data-lang-fr>Fournissez ou validez la politique de confidentialité</span><span data-lang-ar style="display:none">قدّموا أو صادقوا على سياسة الخصوصية</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Obligatoire pour la case à cocher du formulaire (سياسة حماية البيانات). Si vous n'en avez pas, nous pouvons en proposer une version standard.</span><span data-lang-ar style="display:none">إلزامية لمربع الاختيار في الاستمارة (سياسة حماية البيانات). إن لم تتوفر لديكم، يمكننا اقتراح نسخة قياسية.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large"><span data-lang-fr>Espace réponse : ___ (ou cochez : ☐ Utiliser une version standard proposée par le développeur)</span><span data-lang-ar style="display:none">مساحة الإجابة : ___ (أو ضعوا علامة : ☐ استخدام نسخة قياسية يقترحها المطور)</span></div>
+    </div>
+
+    <!-- Q6.2 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q6.2</span><span class="q-text"><span data-lang-fr>Fournissez les conditions d'utilisation du site</span><span data-lang-ar style="display:none">قدّموا شروط استخدام الموقع</span></span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large"><span data-lang-fr>Espace réponse : ___ (ou cochez : ☐ Version standard)</span><span data-lang-ar style="display:none">مساحة الإجابة : ___ (أو ضعوا علامة : ☐ نسخة قياسية)</span></div>
+    </div>
+
+    <!-- Q6.3 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q6.3</span><span class="q-text"><span data-lang-fr>Informations légales de l'organisme (mentions légales)</span><span data-lang-ar style="display:none">المعلومات القانونية للمؤسسة (الإشارات القانونية)</span></span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Raison sociale</span><span data-lang-ar style="display:none">الاسم القانوني</span> : ___<br>
+        <span data-lang-fr>Siège social</span><span data-lang-ar style="display:none">المقر الاجتماعي</span> : ___<br>
+        <span data-lang-fr>N° d'immatriculation</span><span data-lang-ar style="display:none">رقم التسجيل</span> : ___<br>
+        <span data-lang-fr>Directeur de la publication</span><span data-lang-ar style="display:none">مدير النشر</span> : ___
+      </div>
+    </div>
+
+    <!-- Q6.4 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q6.4</span><span class="q-text"><span data-lang-fr>Nom de domaine et hébergement</span><span data-lang-ar style="display:none">اسم النطاق والاستضافة</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Le CDC mentionne WWW.IDMADJ.DZ. Confirmez le domaine et fournissez les accès si déjà acheté, ou indiquez si le développeur doit s'en charger.</span><span data-lang-ar style="display:none">يذكر دفتر الشروط WWW.IDMADJ.DZ. أكّدوا النطاق وقدّموا بيانات الدخول إن تم شراؤه، أو أشيروا إن كان على المطور التكفل بذلك.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Domaine confirmé</span><span data-lang-ar style="display:none">النطاق المؤكد</span> : ___<br>
+        <span data-lang-fr>Déjà acheté ?</span><span data-lang-ar style="display:none">تم شراؤه ؟</span> ☐ <span data-lang-fr>Oui</span><span data-lang-ar style="display:none">نعم</span> ☐ <span data-lang-fr>Non</span><span data-lang-ar style="display:none">لا</span><br>
+        <span data-lang-fr>Hébergeur</span><span data-lang-ar style="display:none">مقدم الاستضافة</span> : ___
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--              SECTION 7 : BACK OFFICE & EMAILS              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page-section" id="s7">
+  <div class="page-header" style="background: linear-gradient(135deg, #92400e, #78350f);">
+    <div class="page-number" style="background: var(--accent);">7</div>
+    <div>
+      <h2><span data-lang-fr>Lوحة التحكم — Back Office & Emails</span><span data-lang-ar style="display:none">لوحة التحكم والرسائل الآلية</span></h2>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="context-block">
+      <strong><span data-lang-fr>Contexte (CDC) :</span><span data-lang-ar style="display:none">السياق (دفتر الشروط) :</span></strong>
+      <span data-lang-fr>Le CDC prévoit un Back Office en arabe très simple avec 2 fonctions : (1) Gestion du contenu (modifier textes, ajouter sponsors/logos, publier photos/actualités) et (2) Gestion des inscriptions (tableau + export Excel). L'email de confirmation est simple et automatique.</span>
+      <span data-lang-ar style="display:none">يتضمن دفتر الشروط لوحة تحكم بالعربية بسيطة جداً بوظيفتين : (1) إدارة المحتوى (تعديل النصوص، إضافة رعاة/شعارات، نشر صور/أخبار) و (2) إدارة التسجيلات (جدول + تصدير Excel). رسالة التأكيد بسيطة وآلية.</span>
+    </div>
+
+    <!-- Q7.1 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q7.1</span><span class="q-text"><span data-lang-fr>Qui aura accès à la لوحة التحكم (Back Office) ?</span><span data-lang-ar style="display:none">من سيتمتع بصلاحية الدخول إلى لوحة التحكم ؟</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Noms et emails des personnes qui géreront le contenu et les inscriptions.</span><span data-lang-ar style="display:none">أسماء وبريد الأشخاص الذين سيديرون المحتوى والتسجيلات.</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone">
+        <span data-lang-fr>Admin 1 — Nom</span><span data-lang-ar style="display:none">المشرف 1 — الاسم</span> : ___ | Email : ___<br>
+        <span data-lang-fr>Admin 2 — Nom</span><span data-lang-ar style="display:none">المشرف 2 — الاسم</span> : ___ | Email : ___
+      </div>
+    </div>
+
+    <!-- Q7.2 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q7.2</span><span class="q-text"><span data-lang-fr>Quel email d'expédition pour les confirmations automatiques ?</span><span data-lang-ar style="display:none">ما بريد الإرسال لرسائل التأكيد الآلية ؟</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>L'adresse qui apparaîtra comme expéditeur des emails de confirmation. Ex : noreply@idmadj.dz</span><span data-lang-ar style="display:none">العنوان الذي سيظهر كمرسل لرسائل التأكيد. مثال : noreply@idmadj.dz</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span>
+      <div class="answer-zone small"><span data-lang-fr>Email d'expédition</span><span data-lang-ar style="display:none">بريد الإرسال</span> : ___</div>
+    </div>
+
+    <!-- Q7.3 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q7.3</span><span class="q-text"><span data-lang-fr>Validez le contenu de l'email de confirmation automatique</span><span data-lang-ar style="display:none">صادقوا على محتوى رسالة التأكيد الآلية</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Le CDC prévoit un email simple : « تم استلام طلبكم بنجاح ». Souhaitez-vous un texte plus élaboré ?</span><span data-lang-ar style="display:none">يتضمن دفتر الشروط رسالة بسيطة : « تم استلام طلبكم بنجاح ». هل ترغبون في نص أكثر تفصيلاً ؟</span></div>
+      <span class="tag tag-required"><span data-lang-fr>OBLIGATOIRE</span><span data-lang-ar style="display:none">إلزامي</span></span><span class="tag tag-bilingual"><span data-lang-fr>BILINGUE AR/FR</span><span data-lang-ar style="display:none">ثنائي اللغة</span></span>
+      <div class="answer-zone large">
+        <span data-lang-fr>Objet de l'email</span><span data-lang-ar style="display:none">موضوع الرسالة</span> : ___<br><br>
+        <span data-lang-fr>Corps de l'email</span><span data-lang-ar style="display:none">نص الرسالة</span> : ___
+      </div>
+    </div>
+
+    <!-- Q7.4 -->
+    <div class="question-block">
+      <div class="q-label"><span class="q-number">Q7.4</span><span class="q-text"><span data-lang-fr>Y a-t-il d'autres emails automatiques à prévoir ?</span><span data-lang-ar style="display:none">هل توجد رسائل آلية أخرى يجب توفيرها ؟</span></span></div>
+      <div class="q-hint"><svg class="hint-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> <span data-lang-fr>Le CDC ne prévoit qu'un email de confirmation. Souhaitez-vous des emails supplémentaires (rappel, acceptation, etc.) ?</span><span data-lang-ar style="display:none">لا يتضمن دفتر الشروط سوى رسالة تأكيد واحدة. هل ترغبون في رسائل إضافية (تذكير، قبول، إلخ) ؟</span></div>
+      <span class="tag tag-optional"><span data-lang-fr>OPTIONNEL</span><span data-lang-ar style="display:none">اختياري</span></span>
+      <div class="answer-zone"><span data-lang-fr>Espace réponse : ___</span><span data-lang-ar style="display:none">مساحة الإجابة : ___</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--           RÉCAPITULATIF                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page-section page-break">
+  <div class="page-header" style="background: linear-gradient(135deg, #0ea5e9, #6366f1);">
+    <div class="page-number" style="background: white; color: var(--primary);">
+      <span class="check-icon-wrapper">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+    </div>
+    <div><h2><span data-lang-fr>Récapitulatif — Synthèse des livrables attendus</span><span data-lang-ar style="display:none">ملخص — خلاصة المخرجات المتوقعة</span></h2></div>
+  </div>
+  <div class="page-body">
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th style="width:40%"><span data-lang-fr>Section</span><span data-lang-ar style="display:none">القسم</span></th>
+          <th style="width:15%"><span data-lang-fr>Questions</span><span data-lang-ar style="display:none">الأسئلة</span></th>
+          <th style="width:15%"><span data-lang-fr>Obligatoires</span><span data-lang-ar style="display:none">إلزامية</span></th>
+          <th style="width:30%"><span data-lang-fr>Fichiers attendus</span><span data-lang-ar style="display:none">الملفات المتوقعة</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span data-lang-fr>Informations générales</span><span data-lang-ar style="display:none">المعلومات العامة</span></td><td>10</td><td>8</td><td><span data-lang-fr>Logos, charte, logos sponsors</span><span data-lang-ar style="display:none">شعارات، ميثاق، شعارات الرعاة</span></td></tr>
+        <tr><td><span data-lang-fr>Section Accueil / Hero</span><span data-lang-ar style="display:none">قسم الرئيسية / Hero</span></td><td>8</td><td>5</td><td><span data-lang-fr>Image hero, vidéo promo</span><span data-lang-ar style="display:none">صورة البطل، فيديو ترويجي</span></td></tr>
+        <tr><td><span data-lang-fr>À propos</span><span data-lang-ar style="display:none">عن الجلسات</span></td><td>6</td><td>4</td><td><span data-lang-fr>Photos, mot du président</span><span data-lang-ar style="display:none">صور، كلمة الرئيس</span></td></tr>
+        <tr><td><span data-lang-fr>Programme</span><span data-lang-ar style="display:none">البرنامج</span></td><td>6</td><td>5</td><td><span data-lang-fr>Programme PDF</span><span data-lang-ar style="display:none">برنامج PDF</span></td></tr>
+        <tr><td><span data-lang-fr>Centre de presse</span><span data-lang-ar style="display:none">المركز الإعلامي</span></td><td>5</td><td>1</td><td><span data-lang-fr>Photos galerie, press kit</span><span data-lang-ar style="display:none">صور المعرض، ملف صحفي</span></td></tr>
+        <tr><td><span data-lang-fr>Formulaire d'inscription</span><span data-lang-ar style="display:none">استمارة التسجيل</span></td><td>6</td><td>5</td><td>—</td></tr>
+        <tr><td><span data-lang-fr>Textes légaux</span><span data-lang-ar style="display:none">النصوص القانونية</span></td><td>4</td><td>4</td><td>—</td></tr>
+        <tr><td><span data-lang-fr>Back Office & Emails</span><span data-lang-ar style="display:none">لوحة التحكم والرسائل</span></td><td>4</td><td>3</td><td>—</td></tr>
+        <tr style="font-weight:700; background: rgba(14,165,233,.08);">
+          <td><strong>TOTAL</strong></td>
+          <td><strong>49</strong></td>
+          <td><strong>35</strong></td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="doc-footer">
+  <p><strong><span data-lang-fr>IDMADJ.DZ — Document de collecte de contenus (V2 — Nouveau CDC)</span><span data-lang-ar style="display:none">IDMADJ.DZ — وثيقة جمع المحتويات (النسخة 2 — دفتر الشروط الجديد)</span></strong></p>
+  <p><span data-lang-fr>Préparé pour : المؤسسة الجزائرية لدعم الشباب وتنمية المقاولاتية</span><span data-lang-ar style="display:none">أُعدّ لـ : المؤسسة الجزائرية لدعم الشباب وتنمية المقاولاتية</span></p>
+  <p><span data-lang-fr>Date de création : Juillet 2026 — Version 2.0 (adapté au nouveau cahier des charges)</span><span data-lang-ar style="display:none">تاريخ الإنشاء : جويلية 2026 — الإصدار 2.0 (مكيّف مع دفتر الشروط الجديد)</span></p>
+  <p style="margin-top:1rem; font-size:.8rem;"><span data-lang-fr>Merci de renvoyer ce document complété à l'adresse email convenue. <br>Pour toute question, n'hésitez pas à nous contacter.</span><span data-lang-ar style="display:none">يرجى إعادة إرسال هذه الوثيقة مكتملة إلى عنوان البريد المتفق عليه. <br>لأي استفسار، لا تترددوا في الاتصال بنا.</span></p>
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<button class="print-btn no-print" onclick="window.print()">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  <span data-lang-fr>Imprimer / Enregistrer en PDF</span>
+  <span data-lang-ar style="display:none">طباعة / حفظ كـ PDF</span>
+</button>
+
+<script>
+function switchLang(lang) {
+  const html = document.documentElement;
+  const frEls = document.querySelectorAll('[data-lang-fr]');
+  const arEls = document.querySelectorAll('[data-lang-ar]');
+  const btnFr = document.getElementById('btn-fr');
+  const btnAr = document.getElementById('btn-ar');
+
+  if (lang === 'ar') {
+    html.setAttribute('lang', 'ar');
+    html.setAttribute('dir', 'rtl');
+    frEls.forEach(el => el.style.display = 'none');
+    arEls.forEach(el => el.style.display = '');
+    btnFr.classList.remove('active');
+    btnAr.classList.add('active');
+  } else {
+    html.setAttribute('lang', 'fr');
+    html.setAttribute('dir', 'ltr');
+    frEls.forEach(el => el.style.display = '');
+    arEls.forEach(el => el.style.display = 'none');
+    btnFr.classList.add('active');
+    btnAr.classList.remove('active');
+  }
+}
+</script>
+
+</body>
+</html>
