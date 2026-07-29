@@ -3,8 +3,8 @@
 
 // --- Hostinger / External SMTP Settings ---
 // If you create an email address on Hostinger (e.g. contact@idmadj.dz), enter details here:
-$smtp_user = ''; // e.g. 'contact@idmadj.dz'
-$smtp_pass = ''; // e.g. your Hostinger email password
+$smtp_user = 'contact@idmadj.dz';
+$smtp_pass = 'Babou2026@@';
 
 if (!empty($smtp_user) && !empty($smtp_pass)) {
     // 1. Hostinger / Custom SMTP Mode
