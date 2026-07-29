@@ -50,12 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $company_logo = "";
                 $company_profile_pdf = "";
 
-                if (isset($_FILES['personal_photo']) && $_FILES['personal_photo']['error'] === UPLOAD_ERR_OK) {
-                    $ext = pathinfo($_FILES['personal_photo']['name'], PATHINFO_EXTENSION);
-                    $personal_photo = 'uploads/photo_' . time() . '_' . rand(100, 999) . '.' . $ext;
-                    move_uploaded_file($_FILES['personal_photo']['tmp_name'], $personal_photo);
-                }
-
                 if (isset($_FILES['company_logo']) && $_FILES['company_logo']['error'] === UPLOAD_ERR_OK) {
                     $ext = pathinfo($_FILES['company_logo']['name'], PATHINFO_EXTENSION);
                     $company_logo = 'uploads/logo_' . time() . '_' . rand(100, 999) . '.' . $ext;
@@ -324,8 +318,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="address"><?php echo t('reg_address'); ?> *</label>
                     <textarea id="address" name="address" rows="2" required placeholder="<?php echo ($lang === 'ar') ? 'العنوان البريدي للمراسلة الرسمي' : (($lang === 'fr') ? 'Adresse postale officielle' : 'Official mailing address'); ?>"></textarea>
                 </div>
-
-
 
                 <!-- 3. Dynamic Section: Organization Info -->
                 <div id="fields-org-only" style="display:none; margin-top: 2rem; border-top: 1px dashed var(--border-color); padding-top: 2rem;">
