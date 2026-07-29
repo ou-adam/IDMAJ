@@ -27,6 +27,6 @@ jobs:
           set net:timeout 15
           set net:max-retries 3
           open -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_SERVER"
-          mirror -R --verbose --only-newer ./website/ ./
+          mirror -R --verbose ./website/ ./
           bye
           EOF
