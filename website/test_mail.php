@@ -1,57 +1,56 @@
 <?php
-// website/test_mail.php - Standalone SMTP Tester
+// website/test_mail.php: Test Email Sender with full debug log output
 require_once 'includes/mailer.php';
+
+$testTo = isset($_GET['to']) ? trim($_GET['to']) : 'contact@idmadj.dz';
 
 header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>اختبار البريد الإلكتروني SMTP - Papercut Test</title>
-    <style>
-        body { font-family: Tahoma, sans-serif; background: #0f172a; color: #f8fafc; padding: 30px; line-height: 1.6; }
-        .box { max-width: 800px; margin: 0 auto; background: #1e293b; padding: 25px; border-radius: 12px; border: 1px solid #334155; }
-        h1 { color: #38bdf8; border-bottom: 2px solid #334155; padding-bottom: 10px; }
-        .success { background: #064e3b; color: #6ee7b7; padding: 15px; border-radius: 8px; margin: 15px 0; border: 1px solid #047857; }
-        .error { background: #7f1d1d; color: #fca5a5; padding: 15px; border-radius: 8px; margin: 15px 0; border: 1px solid #b91c1c; }
-        pre { background: #090d16; padding: 15px; border-radius: 8px; color: #a7f3d0; overflow-x: auto; font-family: monospace; }
-        .btn { display: inline-block; background: #0284c7; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; margin-top: 15px; }
-        .btn:hover { background: #0369a1; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test d'envoi Email - IDMAJ</title>
 </head>
-<body>
-<div class="box">
-    <h1>اختبار ربط خادم البريد SMTP (Papercut)</h1>
-    <p>إعدادات الخادم الحالية: <strong><?php echo SMTP_HOST . ':' . SMTP_PORT; ?></strong></p>
+<body style="background-color: #0b0f19; color: #f8fafc; font-family: sans-serif; padding: 2rem;">
 
-    <?php
-    if (isset($_GET['run'])) {
-        echo "<p>جاري إرسال رسالة تجريبية...</p>";
-        $mailer = new SimpleSMTPMailer();
-        $testEmail = isset($_GET['email']) ? $_GET['email'] : ADMIN_NOTIFY_EMAIL;
-        $res = $mailer->send(
-            $testEmail,
-            "رسالة اختبار SMTP من منصة إدماج IDMAJ - " . date('H:i:s'),
-            "<h2>اختبار نجاح إرسال البريد الإلكتروني</h2><p>هذه الرسالة تؤكد أن خادم SMTP (Papercut) يعمل بشكل ممتاز ويستقبل كافة المراسلات والتحويلات الخاصة بتسجيلات وفورمات الموقع بنجاح.</p><p>الوقت: " . date('Y-m-d H:i:s') . "</p>"
-        );
+<div style="max-width: 700px; margin: 0 auto; background: #1e293b; border: 1px solid #334155; padding: 2rem; border-radius: 12px;">
+    <h2 style="color: #38bdf8; margin-top: 0;">📩 Test de diagnostic Email IDMAJ</h2>
+    
+    <form method="GET" style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem; color: #94a3b8;">Adresse email de destination pour le test :</label>
+        <input type="email" name="to" value="<?php echo htmlspecialchars($testTo); ?>" style="width: 70%; padding: 8px 12px; background: #0f172a; border: 1px solid #334155; color: #fff; border-radius: 6px;">
+        <button type="submit" style="padding: 8px 16px; background: #0284c7; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Tester l'envoi</button>
+    </form>
 
-        if ($res['success']) {
-            echo "<div class='success'>✔ تم إرسال الرسالة بنجاح عبر SMTP! يرجى مراجعة برنامج Papercut على جهازك.</div>";
-        } else {
-            echo "<div class='error'>❌ حدث خطأ أثناء الإرسال: " . htmlspecialchars($res['message']) . "</div>";
-        }
+<?php
+$subject = "Test Email IDMAJ - " . date('d/m/Y H:i:s');
+$body = get_email_header_template("اختبار إرسال البريد الإلكتروني");
+$body .= "<p>هذه رسالة تجريبية للتأكد من وصول التنبيهات بنجاح من منصة إدماج 2026.</p>";
+$body .= get_email_footer_template();
 
-        echo "<h3>سجل معاملات SMTP (SMTP Handshake Protocol Logs):</h3>";
-        echo "<pre>";
-        foreach ($res['log'] as $line) {
+$result = send_app_email($testTo, $subject, $body);
+?>
+
+    <div style="background: #0f172a; border: 1px solid <?php echo $result['success'] ? '#10b981' : '#f43f5e'; ?>; padding: 15px; border-radius: 8px; margin-top: 15px;">
+        <h3 style="margin-top: 0; color: <?php echo $result['success'] ? '#10b981' : '#f43f5e'; ?>;">
+            <?php echo $result['success'] ? '✅ E-mail envoyé avec succès !' : '❌ Échec d’envoi'; ?>
+        </h3>
+        <p style="margin: 5px 0;"><strong>Statut :</strong> <?php echo htmlspecialchars($result['message']); ?></p>
+    </div>
+
+    <h4 style="color: #94a3b8; margin-top: 20px;">📋 Journal de connexion (Logs) :</h4>
+    <pre style="background: #090d16; color: #38bdf8; padding: 15px; border-radius: 6px; font-size: 13px; overflow-x: auto; max-height: 300px;"><?php
+    if (!empty($result['log'])) {
+        foreach ($result['log'] as $line) {
             echo htmlspecialchars($line) . "\n";
         }
-        echo "</pre>";
+    } else {
+        echo "Aucun log journalisé.";
     }
-    ?>
-
-    <a href="test_mail.php?run=1" class="btn">إرسال رسالة اختبار الآن (Send Test Email)</a>
+    ?></pre>
 </div>
+
 </body>
 </html>

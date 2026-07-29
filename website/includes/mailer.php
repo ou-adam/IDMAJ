@@ -100,6 +100,21 @@ class SimpleSMTPMailer {
             fputs($socket, base64_encode($this->password) . "\r\n");
             $this->log("CLIENT: [Pass Base64]");
             $response = $this->readResponse($socket);
+
+            if (substr($response, 0, 3) !== '235') {
+                $err = "SMTP Auth failed: " . trim($response);
+                $this->log($err);
+                @fclose($socket);
+
+                // Fallback to PHP native mail()
+                $headers = "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+                $headers .= "From: =?UTF-8?B?" . base64_encode($fromName) . "?= <{$fromEmail}>\r\n";
+                $headers .= "Reply-To: <{$fromEmail}>\r\n";
+                $encodedSubject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
+                $res = @mail($to, $encodedSubject, $htmlMessage, $headers, "-f " . $fromEmail);
+                return ['success' => $res, 'message' => 'SMTP Auth failed (' . trim($response) . '), fallback to mail(): ' . ($res ? 'Sent' : 'Failed'), 'log' => $this->logs];
+            }
         }
 
         // MAIL FROM
@@ -143,6 +158,16 @@ class SimpleSMTPMailer {
         @fclose($socket);
 
         $isOk = (substr($response, 0, 3) == '250');
+        if (!$isOk) {
+            // If SMTP data send failed, fallback to native mail()
+            $headersStr = "MIME-Version: 1.0\r\n";
+            $headersStr .= "Content-Type: text/html; charset=UTF-8\r\n";
+            $headersStr .= "From: =?UTF-8?B?" . base64_encode($fromName) . "?= <{$fromEmail}>\r\n";
+            $headersStr .= "Reply-To: <{$fromEmail}>\r\n";
+            $encodedSubj = "=?UTF-8?B?" . base64_encode($subject) . "?=";
+            $res = @mail($to, $encodedSubj, $htmlMessage, $headersStr, "-f " . $fromEmail);
+            return ['success' => $res, 'message' => 'SMTP send failed (' . trim($response) . '), fallback to mail(): ' . ($res ? 'Sent' : 'Failed'), 'log' => $this->logs];
+        }
         return [
             'success' => $isOk,
             'message' => $isOk ? 'Email sent successfully via SMTP' : 'SMTP Error: ' . trim($response),
