@@ -44,13 +44,19 @@ class SimpleSMTPMailer {
         }
 
         $remote = $this->host . ':' . $this->port;
-        $hostTarget = $this->host;
         if ($this->secure === 'ssl') {
             $remote = 'ssl://' . $this->host . ':' . $this->port;
-            $hostTarget = 'ssl://' . $this->host;
         }
 
-        $socket = @fsockopen($hostTarget, $this->port, $errno, $errstr, 3);
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer'       => false,
+                'verify_peer_name'  => false,
+                'allow_self_signed' => true
+            ]
+        ]);
+
+        $socket = @stream_socket_client($remote, $errno, $errstr, 5, STREAM_CLIENT_CONNECT, $context);
         if (!$socket) {
             $err = "SMTP Connection failed to {$remote}: [$errno] $errstr";
             $this->log($err);
