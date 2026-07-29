@@ -37,17 +37,20 @@ class SimpleSMTPMailer {
             $headers = "MIME-Version: 1.0\r\n";
             $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
             $headers .= "From: =?UTF-8?B?" . base64_encode($fromName) . "?= <{$fromEmail}>\r\n";
+            $headers .= "Reply-To: <{$fromEmail}>\r\n";
             $encodedSubject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
-            $res = @mail($to, $encodedSubject, $htmlMessage, $headers);
+            $res = @mail($to, $encodedSubject, $htmlMessage, $headers, "-f " . $fromEmail);
             return ['success' => $res, 'message' => $res ? 'Mail sent via PHP mail()' : 'Failed PHP mail()', 'log' => ['Native mail() used']];
         }
 
         $remote = $this->host . ':' . $this->port;
+        $hostTarget = $this->host;
         if ($this->secure === 'ssl') {
             $remote = 'ssl://' . $this->host . ':' . $this->port;
+            $hostTarget = 'ssl://' . $this->host;
         }
 
-        $socket = @fsockopen($this->host, $this->port, $errno, $errstr, 2);
+        $socket = @fsockopen($hostTarget, $this->port, $errno, $errstr, 3);
         if (!$socket) {
             $err = "SMTP Connection failed to {$remote}: [$errno] $errstr";
             $this->log($err);
@@ -55,8 +58,9 @@ class SimpleSMTPMailer {
             $headers = "MIME-Version: 1.0\r\n";
             $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
             $headers .= "From: =?UTF-8?B?" . base64_encode($fromName) . "?= <{$fromEmail}>\r\n";
+            $headers .= "Reply-To: <{$fromEmail}>\r\n";
             $encodedSubject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
-            $res = @mail($to, $encodedSubject, $htmlMessage, $headers);
+            $res = @mail($to, $encodedSubject, $htmlMessage, $headers, "-f " . $fromEmail);
             return ['success' => $res, 'message' => $res ? 'SMTP failed; sent via PHP mail() fallback' : $err, 'log' => $this->logs];
         }
 
