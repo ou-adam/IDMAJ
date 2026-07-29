@@ -3,7 +3,7 @@
 
 // --- Hostinger / External SMTP Settings ---
 // If you create an email address on Hostinger (e.g. contact@idmadj.dz), enter details here:
-$smtp_user = 'contact@idmadj.dz';
+$smtp_user = 'contact@afye.dz';
 $smtp_pass = 'Babou2026@@';
 
 if (!empty($smtp_user) && !empty($smtp_pass)) {
@@ -41,8 +41,8 @@ if (!empty($smtp_user) && !empty($smtp_pass)) {
 }
 
 // Sender Details
-define('MAIL_FROM_ADDRESS', !empty($smtp_user) ? $smtp_user : 'contact@idmadj.dz');
+define('MAIL_FROM_ADDRESS', !empty($smtp_user) ? $smtp_user : 'contact@afye.dz');
 define('MAIL_FROM_NAME', 'منصة إدماج IDMAJ 2026');
 
 // Recipient Email for Admin Notifications (All form submissions & registrations)
-define('ADMIN_NOTIFY_EMAIL', 'contact@idmadj.dz');
+define('ADMIN_NOTIFY_EMAIL', 'contact@afye.dz');

@@ -2,7 +2,7 @@
 // website/test_mail.php: Test Email Sender with full debug log output
 require_once 'includes/mailer.php';
 
-$testTo = isset($_GET['to']) ? trim($_GET['to']) : 'contact@idmadj.dz';
+$testTo = isset($_GET['to']) ? trim($_GET['to']) : 'contact@afye.dz';
 
 header('Content-Type: text/html; charset=utf-8');
 ?>
