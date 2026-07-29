@@ -18,6 +18,10 @@ header('Content-Type: text/html; charset=utf-8');
 <div style="max-width: 700px; margin: 0 auto; background: #1e293b; border: 1px solid #334155; padding: 2rem; border-radius: 12px;">
     <h2 style="color: #38bdf8; margin-top: 0;">📩 Test de diagnostic Email IDMAJ</h2>
     
+    <div style="background: #0f172a; padding: 10px 15px; border-radius: 6px; font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">
+        <strong>Configuration SMTP active :</strong> Host: <code><?php echo defined('SMTP_HOST') ? SMTP_HOST : 'N/A'; ?></code> | Port: <code><?php echo defined('SMTP_PORT') ? SMTP_PORT : 'N/A'; ?></code> | User: <code><?php echo defined('SMTP_USER') ? SMTP_USER : 'N/A'; ?></code>
+    </div>
+
     <form method="GET" style="margin-bottom: 20px;">
         <label style="display: block; margin-bottom: 8px; font-size: 0.9rem; color: #94a3b8;">Adresse email de destination pour le test :</label>
         <input type="email" name="to" value="<?php echo htmlspecialchars($testTo); ?>" style="width: 70%; padding: 8px 12px; background: #0f172a; border: 1px solid #334155; color: #fff; border-radius: 6px;">
