@@ -37,6 +37,7 @@ if ($is_localhost) {
 
     // Candidate database names on Hostinger
     $db_candidates = [
+        'u970568928_db_idmaj',
         'u970568928_idmaj',
         'u970568928_idmadj',
         'u970568928_idmadj_db'

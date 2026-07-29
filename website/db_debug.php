@@ -7,6 +7,7 @@ $user = 'u970568928_idmaj';
 $pass = 'Babou2026@@';
 
 $databases_to_test = [
+    'u970568928_db_idmaj',
     'u970568928_idmaj',
     'u970568928_idmadj',
     'u970568928_idmadj_db',
