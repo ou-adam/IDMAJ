@@ -175,7 +175,7 @@ INSERT INTO
     users (username, password, role)
 VALUES (
         'admin',
-        '$2y$10$eE61dO/NndvR.qF2jPq/k.Q0wG6qL.YxZ984E3k3.1b9f7s2n3m4K',
+        '$2y$10$a31WcmTBnVP59GRQBNcnXOuZE61xljxW1OAiXGpq4mfdFZ022yqmO',
         'super_admin'
     )
 ON DUPLICATE KEY UPDATE
